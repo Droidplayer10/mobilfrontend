@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
-import NewsScreen from './Screens/NewsScreen';
+
 import ProfileScreen from './Screens/ProfileScreen';
 import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
@@ -24,7 +24,7 @@ function HomeStackScreen() {
       headerShown: false
     }}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="News" component={NewsScreen} />
+   
     </HomeStack.Navigator>
   );
 }
@@ -37,7 +37,7 @@ function SettingsStackScreen() {
       headerShown: false
     }}>
       <SettingsStack.Screen name="Settings" component={SettingsScreen} />
-      <SettingsStack.Screen name="News" component={NewsScreen} />
+      
     </SettingsStack.Navigator>
   );
 }
@@ -50,7 +50,7 @@ function ProfileStackScreen() {
       headerShown: false
     }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
-      <ProfileStack.Screen name="News" component={NewsScreen} />
+    
     </ProfileStack.Navigator>
   );
   
@@ -63,6 +63,8 @@ function NotificationsScreen({ navigation }) {
     </View>
   );
 }
+
+
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -100,13 +102,8 @@ export default function App() {
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
         
       </Tab.Navigator>
+      
     
-  
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        
-</Drawer.Navigator>
-
     
     </NavigationContainer>
     

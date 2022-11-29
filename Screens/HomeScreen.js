@@ -1,48 +1,54 @@
-import React, {component} from 'react';
-import { Button, Text, View, FlatList,SafeAreaView, StyleSheet, StatusBar } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
-import App from '../App';
-import NewsScreen from './NewsScreen';
-import Emberek from './Emberek';
+import React, { Component } from 'react';
+import { Button, StyleSheet, View } from 'react-native';
 
+export default class ButtonBasics extends Component {
+  _onPressButton() {
+    alert('You tapped the button!')
+  }
 
- 
-
-//-------Főprogram--------------------
-const Home = ({navigation}) => {
-  
-
-
+  render() {
     return (
-        <View>
-            
-<Button
-          title="Emberek"
-          component={Emberek}
-        />
-<Button
-          title="Go to News"
-          onPress={() =>
-            navigation.navigate('News')
-          }
-        />
-    
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={this._onPressButton}
+            title="Press Me"
+          />
         </View>
-       
-       
-        
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={this._onPressButton}
+            title="Press Me"
+            color="#841584"
+          />
+        </View>
+        <View style={styles.alternativeLayoutButtonContainer}>
+          <Button
+            onPress={this._onPressButton}
+            title="This looks great!"
+          />
+          <Button
+            onPress={this._onPressButton}
+            title="OK!"
+            color="#841584"
+          />
+        </View>
+      </View>
+    );
+  }
+}
 
-        
-        
-
-)
-
-};
-
-
-
-
-export default Home;
+const styles = StyleSheet.create({
+  container: {
+   flex: 1,
+   justifyContent: 'center',
+  },
+  buttonContainer: {
+    margin: 20
+  },
+  alternativeLayoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  }
+});

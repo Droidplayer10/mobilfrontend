@@ -48,7 +48,15 @@ export default function Profile({navigation}) {
       <TouchableOpacity style={styles.loginBtn}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
+  
+  
+  
+  
+  
     </View>
+  
+  
+  
   );
 }
  
