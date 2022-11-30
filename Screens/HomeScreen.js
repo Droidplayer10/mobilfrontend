@@ -9,29 +9,23 @@ export default class ButtonBasics extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          <Button
+         <View style={styles.alternativeLayoutButtonContainer}>
+          <Button style={styles.Button}
             onPress={this._onPressButton}
-            title="Press Me"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="Press Me"
-            color="#841584"
-          />
-        </View>
-        <View style={styles.alternativeLayoutButtonContainer}>
-          <Button
-            onPress={this._onPressButton}
-            title="This looks great!"
+            title="Foglalás"
+            color="blue"
           />
           <Button
             onPress={this._onPressButton}
-            title="OK!"
-            color="#841584"
+            title="Autó"
+            color="blue"
           />
+          <Button
+            onPress={this._onPressButton}
+            title="Plussz funkció"
+            color="blue"
+          />
+         
         </View>
       </View>
     );
@@ -50,5 +44,6 @@ const styles = StyleSheet.create({
     margin: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
-  }
+  },
+  
 });
