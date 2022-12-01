@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
+import AutoScreen from './AutoScreen';
 
 export default class Home extends Component {
   _onPressButton() {
@@ -11,7 +12,8 @@ export default class Home extends Component {
       <View style={styles.container}>
          <View style={styles.alternativeLayoutButtonContainer}>
           <Button style={styles.Button}
-            onPress={this._onPressButton}
+            onPress={() =>this.props.navigation.navigate('News')}
+            Component={AutoScreen}
             title="Foglalás"
             color="blue"
           />
