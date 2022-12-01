@@ -17,12 +17,12 @@ export default class ButtonBasics extends Component {
           />
           <Button
             onPress={this._onPressButton}
-            title="Autó"
+            title="Szoba"
             color="blue"
           />
           <Button
             onPress={this._onPressButton}
-            title="Plussz funkció"
+            title="Autó"
             color="blue"
           />
          
