@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import {StyleSheet, ActivityIndicator, FlatList, Text, View, Image, Linking, Button,TextInput } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
-export default class News extends React.Component {
+export default class Auto extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       data: [],
       isLoading: true,
-      nyelv:"hu"
+      orszag:""
     };
   }
 
@@ -26,20 +26,20 @@ export default class News extends React.Component {
   }
 
   componentDidMount() {
-    this.getNews(this.state.nyelv);
+    this.getNews(this.state.orszag);
   }
 
 
   valtoztat=(szoveg)=>{
-    this.setState({nyelv:szoveg})
+    this.setState({orszag:szoveg})
   }
 
   kereses=()=>{
     this.getMovies();
   }
 
-  nyelv_valtoztat_pickerrel=(ertek)=>{
-      this.setState({nyelv:ertek})
+  orszag_valtoztat_pickerrel=(ertek)=>{
+      this.setState({orszag:ertek})
       this.getNews(ertek)
   }
 
@@ -50,20 +50,20 @@ export default class News extends React.Component {
     const { data, isLoading } = this.state;
 
     return (
-      <View style={{ flex: 1, padding: 24 , backgroundColor:"#000033",color:"white"}}>
-<Text style={{fontSize:20,color:"blue"}}>Nyelv:</Text>
+      <View style={{ flex: 1, padding: 24 , backgroundColor:"#fff",color:"white"}}>
+<Text style={{fontSize:20,color:"black"}}>Válassz országot:</Text>
               <Picker 
                 style={{backgroundColor:"#42adf5",color:"white",marginTop:10, marginBottom:10}}
-                selectedValue={this.state.nyelv}
-                onValueChange={(itemValue) => this.nyelv_valtoztat_pickerrel(itemValue)
+                selectedValue={this.state.orszag}
+                onValueChange={(itemValue) => this.orszag_valtoztat_pickerrel(itemValue)
               }>
-                  <Picker.Item label="Magyar" value="hu" />
-                  <Picker.Item label="Amerikai" value="us" />
-                  <Picker.Item label="Kínai" value="cn" />
-                  <Picker.Item label="Olasz" value="it" />
-                  <Picker.Item label="Román" value="ro" />
-                  <Picker.Item label="Orosz" value="ru" />
-                  <Picker.Item label="Francia" value="fr" />
+                  <Picker.Item label="Magyarország" value="hu" />
+                  <Picker.Item label="Amerika" value="us" />
+                  <Picker.Item label="Kína" value="cn" />
+                  <Picker.Item label="Olaszország" value="it" />
+                  <Picker.Item label="Görögország" value="gr" />
+                  <Picker.Item label="Oroszország" value="ru" />
+                  <Picker.Item label="Kanada" value="ca" />
 
               </Picker>
       {isLoading ? <ActivityIndicator/> : (

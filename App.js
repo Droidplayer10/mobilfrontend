@@ -14,6 +14,21 @@ import SettingsScreen from './Screens/SettingsScreen';
 
 
 
+const AjanlatStack = createNativeStackNavigator();
+
+function AjanlatStackScreen() {
+  return (
+    <HomeStack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <AjanlatStack.Screen name="Home" component={HomeScreen} />
+      <AjanlatStack.Screen name="Auto" component={AutoScreen} />
+   
+    </HomeStack.Navigator>
+  );
+}
+
+
 
 
 const HomeStack = createNativeStackNavigator();
@@ -24,7 +39,7 @@ function HomeStackScreen() {
       headerShown: false
     }}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="News" component={AutoScreen} />
+      <HomeStack.Screen name="Auto" component={AutoScreen} />
    
     </HomeStack.Navigator>
   );
@@ -90,6 +105,8 @@ export default function App() {
               iconName = focused ? 'ios-settings-sharp' : 'ios-settings-outline';
             } else if(route.name == 'Profile'){
               iconName = focused ? 'ios-finger-print' : 'ios-finger-print-outline';
+            } else if(route.name == 'Ajanlatok'){
+              iconName = focused ? 'ios-offer' : 'ios-offer-outline';
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -99,8 +116,10 @@ export default function App() {
         })}
       >
         <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Ajanlatok" component={AjanlatStackScreen} />
         <Tab.Screen name="Profile" component={ProfileStackScreen} />
         <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        
         
       </Tab.Navigator>
       

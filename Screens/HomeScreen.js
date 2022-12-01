@@ -12,7 +12,7 @@ export default class Home extends Component {
       <View style={styles.container}>
          <View style={styles.alternativeLayoutButtonContainer}>
           <Button style={styles.Button}
-            onPress={() =>this.props.navigation.navigate('News')}
+            onPress={() =>this.props.navigation.navigate('Auto')}
             Component={AutoScreen}
             title="Foglalás"
             color="blue"

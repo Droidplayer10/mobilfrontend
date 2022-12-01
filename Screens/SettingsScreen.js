@@ -4,7 +4,7 @@ import { Button, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View } fro
 const STYLES = ['default', 'dark-content', 'light-content'];
 const TRANSITIONS = ['fade', 'slide', 'none'];
 
-const StatusBarEg = () => {
+const Settings = () => {
     const [hidden, setHidden] = useState(false);
     const [statusBarStyle, setStatusBarStyle] = useState(STYLES[0]);
     const [statusBarTransition, setStatusBarTransition] = useState(TRANSITIONS[0]);
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default StatusBarEg;
+export default Settings;
