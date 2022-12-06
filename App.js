@@ -18,13 +18,13 @@ const AjanlatStack = createNativeStackNavigator();
 
 function AjanlatStackScreen() {
   return (
-    <HomeStack.Navigator screenOptions={{
+    <AjanlatStack.Navigator screenOptions={{
       headerShown: false
     }}>
       <AjanlatStack.Screen name="Home" component={HomeScreen} />
       <AjanlatStack.Screen name="Auto" component={AutoScreen} />
    
-    </HomeStack.Navigator>
+    </AjanlatStack.Navigator>
   );
 }
 
@@ -106,7 +106,7 @@ export default function App() {
             } else if(route.name == 'Profile'){
               iconName = focused ? 'ios-finger-print' : 'ios-finger-print-outline';
             } else if(route.name == 'Ajanlatok'){
-              iconName = focused ? 'ios-offer' : 'ios-offer-outline';
+              iconName = focused ? 'pricetags' : 'pricetags-outline';
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;

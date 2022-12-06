@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
+import { SearchBar } from 'react-native-elements';
 import { Button, StyleSheet, View } from 'react-native';
 import AutoScreen from './AutoScreen';
 
-export default class Home extends Component {
-  _onPressButton() {
-    alert('You tapped the button!')
-  }
+export default class Home extends React.Component {  
+  state = {
+    search: '',
+  };
+
+  updateSearch = (search) => {
+    this.setState({ search });
+  };
 
   render() {
+    const { search } = this.state;
     return (
       <View style={styles.container}>
+
+<SearchBar
+        placeholder="Type Here..."
+        onChangeText={this.updateSearch}
+        value={search}
+        
+        containerStyle={{backgroundColor: 'white', borderWidth: 1, borderRadius: 5}}
+      />
+
          <View style={styles.alternativeLayoutButtonContainer}>
           <Button style={styles.Button}
             onPress={() =>this.props.navigation.navigate('Auto')}
@@ -17,13 +32,15 @@ export default class Home extends Component {
             title="Foglalás"
             color="blue"
           />
-          <Button
-            onPress={this._onPressButton}
+        <Button style={styles.Button}
+            onPress={() =>this.props.navigation.navigate('Auto')}
+            Component={AutoScreen}
             title="Szoba"
             color="blue"
           />
-          <Button
-            onPress={this._onPressButton}
+        <Button style={styles.Button}
+            onPress={() =>this.props.navigation.navigate('Auto')}
+            Component={AutoScreen}
             title="Autó"
             color="blue"
           />
@@ -38,6 +55,8 @@ const styles = StyleSheet.create({
   container: {
    flex: 1,
    justifyContent: 'center',
+    padding: 24,
+    backgroundColor: "#eaeaea"
   },
   buttonContainer: {
     margin: 20
@@ -47,5 +66,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
+  
   
 });

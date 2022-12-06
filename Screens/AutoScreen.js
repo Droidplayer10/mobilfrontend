@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {StyleSheet, ActivityIndicator, FlatList, Text, View, Image, Linking, Button,TextInput } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
+
+
+
 export default class Auto extends Component {
   constructor(props) {
     super(props);
