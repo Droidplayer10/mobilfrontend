@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import {StyleSheet, ActivityIndicator, FlatList, Text, View, Image, Linking, Button,TextInput, Touchable } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import {StyleSheet, ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity,Linking, Button,TextInput } from 'react-native';
+//const ipcim="192.168.6.7:3000";
 
 
-
-
-export default class Auto extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       data: [],
       isLoading: true,
-      orszag:""
+      szoveg1: "",
+      szoveg2: ""
     };
   }
 
-  async getNews(ertek) {
+  async getMovies() {
     try {
       const response = await fetch('http://192.168.6.8:3000/orszagok');
       const json = await response.json();
@@ -29,117 +28,93 @@ export default class Auto extends Component {
   }
 
   componentDidMount() {
-    this.getNews(this.state.orszag);
-  }
-
-
-  valtoztat=(szoveg)=>{
-    this.setState({orszag:szoveg})
-  }
-
-  kereses=()=>{
     this.getMovies();
   }
 
-  orszag_valtoztat_pickerrel=(ertek)=>{
-      this.setState({orszag:ertek})
-      this.getNews(ertek)
+  keres=()=>{
+    alert("Hello")
   }
+
 
 
   render() {
     const { data, isLoading } = this.state;
 
     return (
+      <View style={{ flex: 1, padding: 24 , marginTop:40}}>
 
 
-      <View style={{ flex: 1, padding: 24 , backgroundColor:"#fff",color:"white"}}>
-
-
+        <Text style={{fontStyle:"italic"}} >Honnan:</Text>
+            <TextInput
+        style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 10}}
         
-<Text style={{fontSize:20,color:"black"}}>Válassz országot:</Text>
-            {/*  <Picker 
-                style={{backgroundColor:"#42adf5",color:"white",marginTop:10, marginBottom:10}}
-                selectedValue={this.state.orszag}
-                onValueChange={(itemValue) => this.orszag_valtoztat_pickerrel(itemValue)
-              }>
-                  <Picker.Item label="Magyarország" value="hu" />
-                  <Picker.Item label="Amerika" value="us" />
-                  <Picker.Item label="Kína" value="cn" />
-                  <Picker.Item label="Olaszország" value="it" />
-                  <Picker.Item label="Görögország" value="gr" />
-                  <Picker.Item label="Oroszország" value="ru" />
-                  <Picker.Item label="Kanada" value="ca" />
+        onChangeText={szoveg1 => this.setState({szoveg1})}
+        value={this.state.szoveg1}
+      />       
 
-              </Picker>
-      {isLoading ? <ActivityIndicator/> : (*/}
+<Text>Hova:</Text>
+            <TextInput
+        style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 10}}
+      
+        onChangeText={szoveg2 => this.setState({szoveg2})}
+        value={this.state.szoveg2}
+      />       
+
+<TouchableOpacity
+            style={{ width: "100%",
+            borderRadius: 25,
+            height: 40,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 5,
+            backgroundColor: "#68BBE3"}}
+            onPress={()=>this.keres()}
+          >
+            <Text style={{fontStyle: "italic"}}>Keresés</Text>
+          </TouchableOpacity>
+
+
+
+        {isLoading ? <ActivityIndicator/> : (
           <FlatList
-            data={data}
-            keyExtractor={({ id }, index) => id}
-            renderItem={({ item }) => (
-              <View>
-
-
-              <Text style={styles.alul}>{item.orszag_nev}</Text>
-              <Touchable> Utazás </Touchable>
-
-             
-              <View  style={{    borderBottomColor: 'blue', borderBottomWidth: 1,marginBottom:10  }}/>
-                        
-
-              </View>
-
-
-            )}
-          />
-        
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            
+            <TouchableOpacity
+            style={{ width: "50%",
+            borderRadius: 25,
+            height: 40,
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 5,
+            backgroundColor: "#68BBE3"}}
+            onPress={this.onPress}
+          >
+            <Text style={{fontStyle: "italic"}}>{item.orszag_nev}</Text>
+          </TouchableOpacity>
+          )}
+        />
+        )}
       </View>
     );
   }
 };
 const styles = StyleSheet.create({
-      
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 10
+  },
   button: {
     alignItems: "center",
-    backgroundColor: "#000066",
-    padding: 5,
-    margin:20,
-    borderRadius:3,
-    borderColor:"blue",
-    borderWidth:1
+    backgroundColor: "blue",
+    padding: 10,
+    marginLeft:30,
+    marginRight:30
   },
-  gombfelirat:{
-    color:"#e6e6ff"
-  },
-  bev:{
-    height: 40,
-    
-    backgroundColor:"#000066",
-    
-    borderRadius:3,
-    margin:10,
-    
-    padding:10,
-    color:"#e6e6ff"
-
-  },
-  alul:{
-    color:"#e6e6ff",
-    marginBottom:5,
-    fontWeight:"bold",
-    fontSize:16,
-    textAlign:'center'
-  },
-  alul2:{
-    color:"#b3b3ff",
-    marginBottom:5,
-    fontSize:14,
-    textAlign:'justify'
-  },
-  alul3:{
-    color:"#8080ff",
-    marginBottom:5,
-    fontSize:12,
-    textAlign:'justify'
+  countContainer: {
+    alignItems: "center",
+    padding: 10
   }
 });
