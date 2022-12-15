@@ -1,120 +1,129 @@
-import React, { Component } from 'react';
-import {StyleSheet, ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity,Linking, Button,TextInput } from 'react-native';
-//const ipcim="192.168.6.7:3000";
+import React, { useState, useEffect } from 'react';
 
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      data: [],
-      isLoading: true,
-      szoveg1: "",
-      szoveg2: ""
-    };
-  }
+// import all the components we are going to use
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  TextInput,
+  TouchableOpacity
+} from 'react-native';
 
-  async getMovies() {
-    try {
-      const response = await fetch('http://192.168.6.8:3000/orszagok');
-      const json = await response.json();
-      this.setState({ data: json });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.setState({ isLoading: false });
+const App = () => {
+  const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
+
+  useEffect(() => {
+    fetch('http://192.168.6.8:3000/orszagok')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setFilteredDataSource(responseJson);
+        setMasterDataSource(responseJson);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource and update FilteredDataSource
+      const newData = masterDataSource.filter(function (item) {
+        // Applying filter for the inserted text in search bar
+        const itemData = item.orszag_nev
+          ? item.orszag_nev.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
     }
-  }
+  };
 
-  componentDidMount() {
-    this.getMovies();
-  }
-
-  keres=()=>{
-    alert("Hello")
-  }
-
-
-
-  render() {
-    const { data, isLoading } = this.state;
-
+  const ItemView = ({ item }) => {
     return (
-      <View style={{ flex: 1, padding: 24 , marginTop:40}}>
-
-
-        <Text style={{fontStyle:"italic"}} >Honnan:</Text>
-            <TextInput
-        style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 10}}
-        
-        onChangeText={szoveg1 => this.setState({szoveg1})}
-        value={this.state.szoveg1}
-      />       
-
-<Text>Hova:</Text>
-            <TextInput
-        style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 10}}
+      // Flat List Item
+      <TouchableOpacity
+      style={{ width: "50%",
+      borderRadius: 25,
+      height: 40,
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 5,
+      backgroundColor: "#68BBE3"}}
       
-        onChangeText={szoveg2 => this.setState({szoveg2})}
-        value={this.state.szoveg2}
-      />       
-
-<TouchableOpacity
-            style={{ width: "100%",
-            borderRadius: 25,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 5,
-            backgroundColor: "#68BBE3"}}
-            onPress={()=>this.keres()}
-          >
-            <Text style={{fontStyle: "italic"}}>Keresés</Text>
-          </TouchableOpacity>
-
-
-
-        {isLoading ? <ActivityIndicator/> : (
-          <FlatList
-          data={data}
-          keyExtractor={({ id }, index) => id}
-          renderItem={({ item }) => (
-            
-            <TouchableOpacity
-            style={{ width: "50%",
-            borderRadius: 25,
-            height: 40,
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 5,
-            backgroundColor: "#68BBE3"}}
-            onPress={this.onPress}
-          >
-            <Text style={{fontStyle: "italic"}}>{item.orszag_nev}</Text>
-          </TouchableOpacity>
-          )}
-        />
-        )}
-      </View>
+    >
+      <Text style={{fontStyle: "italic"}}>{item.orszag_nev}</Text>
+    </TouchableOpacity>
     );
-  }
+  };
+
+  const ItemSeparatorView = () => {
+    return (
+      // Flat List Item Separator
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+          backgroundColor: '#C8C8C8',
+        }}
+      />
+    );
+  };
+
+  const getItem = (item) => {
+    // Function for click on an item
+    alert('Id : ' + item.orszag_id + ' Title : ' + item.orszag_nev);
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <TextInput
+          style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          underlineColorAndroid="transparent"
+          placeholder="Keress itt"
+        />
+        <FlatList
+          data={filteredDataSource}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
+      </View>
+    </SafeAreaView>
+  );
 };
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 10
+    backgroundColor: 'white',
   },
-  button: {
-    alignItems: "center",
-    backgroundColor: "blue",
+  itemStyle: {
     padding: 10,
-    marginLeft:30,
-    marginRight:30
   },
-  countContainer: {
-    alignItems: "center",
-    padding: 10
-  }
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: '#009688',
+    backgroundColor: '#FFFFFF',
+  },
 });
+
+export default App;
