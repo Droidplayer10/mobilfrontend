@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
-import AutoScreen from './Screens/AutoScreen';
+import FoglalasScreen from './Screens/FoglalasScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
@@ -22,7 +22,7 @@ function AjanlatStackScreen() {
       headerShown: false
     }}>
       <AjanlatStack.Screen name="Home" component={HomeScreen} />
-      <AjanlatStack.Screen name="Auto" component={AutoScreen} />
+      <AjanlatStack.Screen name="Auto" component={FoglalasScreen} />
    
     </AjanlatStack.Navigator>
   );
@@ -39,7 +39,7 @@ function HomeStackScreen() {
       headerShown: false
     }}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Auto" component={AutoScreen} />
+      <HomeStack.Screen name="Auto" component={FoglalasScreen} />
    
     </HomeStack.Navigator>
   );

@@ -15,6 +15,8 @@ export default class App extends Component {
     };
   }
 
+  
+
   async getMovies() {
     try {
       const response = await fetch('http://192.168.6.8:3000/orszagok');
@@ -38,6 +40,8 @@ export default class App extends Component {
 
 
   render() {
+
+    
     const { data, isLoading } = this.state;
 
     return (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SearchBar } from 'react-native-elements';
 import { Button, StyleSheet, View } from 'react-native';
-import AutoScreen from './AutoScreen';
+import FoglalasScreen from './FoglalasScreen';
 
 export default class Home extends React.Component {  
   state = {
@@ -28,19 +28,19 @@ export default class Home extends React.Component {
          <View style={styles.alternativeLayoutButtonContainer}>
           <Button style={styles.Button}
             onPress={() =>this.props.navigation.navigate('Auto')}
-            Component={AutoScreen}
+            Component={FoglalasScreen}
             title="Foglalás"
             color="blue"
           />
         <Button style={styles.Button}
             onPress={() =>this.props.navigation.navigate('Auto')}
-            Component={AutoScreen}
+            Component={FoglalasScreen}
             title="Szoba"
             color="blue"
           />
         <Button style={styles.Button}
             onPress={() =>this.props.navigation.navigate('Auto')}
-            Component={AutoScreen}
+            Component={FoglalasScreen}
             title="Autó"
             color="blue"
           />
