@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ImageModal from 'react-native-image-modal';
 
 
 
@@ -16,6 +17,7 @@ import {
 
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  // const [ActiveModalId,setActiveModalId]=useState(null);
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -55,27 +57,69 @@ const App = () => {
     }
   };
 
-  const getItem = (item) => {
-    // Function for click on an item
-    alert('ORSZÁG SORSZÁMA : ' + item.orszag_id + ' ORSZÁG NEVE : ' + item.orszag_nev);
-  };
+  
+ 
 
   const ItemView = ({ item }) => {
+   
     return (
      
       // Flat List Item
-      <TouchableOpacity
-      style={{ width: "50%",
-      borderRadius: 25,
-      height: 40,
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 5,
-      backgroundColor: "#68BBE3"}}
-     // onPress={this.getItem}
-    >
-      <Text style={{fontStyle: "italic"}}>{item.orszag_nev}</Text>
-    </TouchableOpacity>
+   <View>
+     <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        
+        }}
+      >
+        <View style={styles.centeredView}>
+          {/* -----MODAL ABLAK------- */}
+          <View style={styles.modalView}>
+          <ImageModal
+    resizeMode="contain"
+    imageBackgroundColor="#000000"
+    style={{
+      width: 250,
+      height: 250,
+    }}
+    source={{
+      uri: 'https://cdn.pixabay.com/photo/2019/07/25/18/58/church-4363258_960_720.jpg',
+    }}
+  />
+            {/* -----MODAL BELUL A KEK ABLAK----- */}
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+               {/* -----KÉK ABLAKON BELUL HideModal GOMB----- */}
+              <Text style={styles.textStyle}>Hide Modal</Text>
+              {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
+              
+              
+              <Text style={styles.textStyle}>Kiválasztás</Text>
+              
+               
+            </Pressable>
+ 
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+        
+      >
+      
+        <Text style={styles.textStyle}> {item.orszag_nev}</Text>
+        
+      </Pressable>
+      <Text>{"\n"}</Text>
+
+   </View>
     );
   };
   
@@ -112,41 +156,6 @@ const App = () => {
         />
 
 {/* ---------------------------------------MODAAAAALLLLLLL*/ }
-<Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          {/* -----MODAL ABLAK------- */}
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello!</Text>
-            {/* -----MODAL BELUL A KEK ABLAK----- */}
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-              {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
-              
-              <TouchableOpacity onPress={getItem} >
-              <Text style={styles.textStyle}>Kiválasztás</Text>
-              
-               </TouchableOpacity>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
 
 
 
@@ -201,7 +210,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#68BBE3",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
