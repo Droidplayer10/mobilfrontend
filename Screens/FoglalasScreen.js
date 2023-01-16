@@ -3,6 +3,7 @@ import ImageModal from 'react-native-image-modal';
 
 
 
+
 // import all the components we are going to use
 import {
   SafeAreaView,
@@ -17,13 +18,14 @@ import {
 
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  // const [ActiveModalId,setActiveModalId]=useState(null);
+  const [ActiveModalId,setActiveModalId]=useState(null);
+  const [SelectedImage,setSelectedImage] = useState(null);
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.6.8:3000/orszagok')
+    fetch('http://192.168.1.121:3000/orszagok')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -57,8 +59,7 @@ const App = () => {
     }
   };
 
-  
- 
+
 
   const ItemView = ({ item }) => {
    
@@ -66,19 +67,23 @@ const App = () => {
      
       // Flat List Item
    <View>
+    {/*-----------MODAL TULAJDONSÁGAI -------------*/}
      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
+       animationType="slide"
+       transparent={true}
+       visible={ActiveModalId === item.orszag_id && modalVisible}
+       onRequestClose={() => {
+         Alert.alert("Modal has been closed.");
+         setModalVisible(false);
+         setActiveModalId(null);
         
         }}
       >
+        {/*-----------MODAL TULAJDONSÁGAI VÉGE-------------*/}
         <View style={styles.centeredView}>
           {/* -----MODAL ABLAK------- */}
           <View style={styles.modalView}>
+            {/*-----------KÉP TULAJDONSÁGAI -------------*/}
           <ImageModal
     resizeMode="contain"
     imageBackgroundColor="#000000"
@@ -87,13 +92,17 @@ const App = () => {
       height: 250,
     }}
     source={{
-      uri: 'https://cdn.pixabay.com/photo/2019/07/25/18/58/church-4363258_960_720.jpg',
+      uri: SelectedImage,
     }}
   />
+   {/*-----------KÉP TULAJDONSÁGAI VÉGE-------------*/}
             {/* -----MODAL BELUL A KEK ABLAK----- */}
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={() => {
+                  setModalVisible(false);
+                  setActiveModalId(null);
+                }}
             >
                {/* -----KÉK ABLAKON BELUL HideModal GOMB----- */}
               <Text style={styles.textStyle}>Hide Modal</Text>
@@ -108,9 +117,14 @@ const App = () => {
           </View>
         </View>
       </Modal>
+      {/*------------Modal megnyitása */}
       <Pressable
         style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
+        onPress={() => {
+          setModalVisible(true);
+          setActiveModalId(item.orszag_id);
+          setSelectedImage(item.orszag_kep);
+        }}
         
       >
       
