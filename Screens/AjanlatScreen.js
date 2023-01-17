@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import ImageModal from 'react-native-image-modal';
+
 
 
 
@@ -14,14 +16,16 @@ import {
   Alert, Modal, Pressable
 } from 'react-native';
 
-const App = () => {
+const Ajanlat = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [ActiveModalId,setActiveModalId]=useState(null);
+  const [SelectedImage,setSelectedImage] = useState(null);
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.6.8:3000/orszagok')
+    fetch('http://192.168.6.8:3000/ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -39,8 +43,8 @@ const App = () => {
       // Filter the masterDataSource and update FilteredDataSource
       const newData = masterDataSource.filter(function (item) {
         // Applying filter for the inserted text in search bar
-        const itemData = item.orszag_nev
-          ? item.orszag_nev.toUpperCase()
+        const itemData = item.ajanlat_nev
+          ? item.ajanlat_nev.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -55,29 +59,38 @@ const App = () => {
     }
   };
 
-  const getItem = (item) => {
-    // Function for click on an item
-    alert('ORSZÁG SORSZÁMA : ' + item.orszag_id + ' ORSZÁG NEVE : ' + item.orszag_nev);
-  };
-
-  const ItemView = ({ item }) => {
+  const Varosok = props => {
     return (
-      // Flat List Item
-      <TouchableOpacity
-      style={{ width: "50%",
-      borderRadius: 25,
-      height: 40,
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 5,
-      backgroundColor: "#68BBE3"}}
-     // onPress={this.getItem}
-    >
-      <Text style={{fontStyle: "italic"}}>{item.orszag_nev}</Text>
-    </TouchableOpacity>
+      <View>
+        <Text> {props.name}</Text>
+        
+      </View>
     );
   };
 
+
+  const ItemView = ({ item }) => {
+   
+    return (
+     
+      // Flat List Item
+   <View>
+   <TouchableOpacity >
+
+   <Varosok name={item.ajanlat_nev}  />
+   
+
+   </TouchableOpacity>
+     
+      
+       
+      
+
+   </View>
+    );
+  };
+  
+  
   const ItemSeparatorView = () => {
     return (
       // Flat List Item Separator
@@ -110,41 +123,6 @@ const App = () => {
         />
 
 {/* ---------------------------------------MODAAAAALLLLLLL*/ }
-<Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          {/* -----MODAL ABLAK------- */}
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello!</Text>
-            {/* -----MODAL BELUL A KEK ABLAK----- */}
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Modal</Text>
-              {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
-              
-              <TouchableOpacity onPress={getItem} >
-              <Text style={styles.textStyle}>Kiválasztás</Text>
-              
-               </TouchableOpacity>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>
 
 
 
@@ -199,7 +177,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#68BBE3",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
@@ -215,4 +193,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default Ajanlat;

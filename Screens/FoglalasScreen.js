@@ -25,7 +25,7 @@ const App = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.121:3000/orszagok')
+    fetch('http://192.168.6.8:3000/orszagok')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);

@@ -10,6 +10,7 @@ import FoglalasScreen from './Screens/FoglalasScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
+import AjanlatScreen from './Screens/AjanlatScreen';
 
 
 
@@ -21,8 +22,8 @@ function AjanlatStackScreen() {
     <AjanlatStack.Navigator screenOptions={{
       headerShown: false
     }}>
-      <AjanlatStack.Screen name="Home" component={HomeScreen} />
-      <AjanlatStack.Screen name="Auto" component={FoglalasScreen} />
+     
+      <AjanlatStack.Screen name="Ajanlat" component={AjanlatScreen} />
    
     </AjanlatStack.Navigator>
   );
@@ -72,13 +73,6 @@ function ProfileStackScreen() {
   
 }
 
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
 
 
 
