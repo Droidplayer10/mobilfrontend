@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import ImageModal from 'react-native-image-modal';
+import { Icon } from 'react-native-elements';
+import FoglalasScreen from './FoglalasScreen';
+
 
 
 
@@ -13,7 +16,7 @@ import {
   FlatList,
   TextInput,
   TouchableOpacity,
-  Alert, Modal, Pressable
+  Alert, Modal, Pressable, Image
 } from 'react-native';
 
 const Ajanlat = () => {
@@ -67,7 +70,10 @@ const Ajanlat = () => {
       </View>
     );
   };
+    
+      // Flat List Item
 
+  {/* <Varosok name={item.ajanlat_nev}  /> */} 
 
   const ItemView = ({ item }) => {
    
@@ -75,21 +81,112 @@ const Ajanlat = () => {
      
       // Flat List Item
    <View>
-   <TouchableOpacity >
+    {/*-----------MODAL TULAJDONSÁGAI -------------*/}
+     <Modal
+       animationType="slide"
+       transparent={true}
+       visible={ActiveModalId === item.ajanlat_id && modalVisible}
+       onRequestClose={() => {
+         Alert.alert("Modal has been closed.");
+         setModalVisible(false);
+         setActiveModalId(null);
+        
+        }}
+      >
+        {/*-----------MODAL TULAJDONSÁGAI VÉGE-------------*/}
+        <View style={styles.centeredView}>
+          {/* -----MODAL ABLAK------- */}
+          <View style={styles.modalView}>
+            
 
-   <Varosok name={item.ajanlat_nev}  />
-   
 
-   </TouchableOpacity>
+
+
+            <Text style={styles.modaltextar}> {item.ajanlat_ar} Ft </Text> 
+  
+  <Text style={{color: "black"}}> {item.ajanlat_leiras}  </Text>
+    
+            {/* -----MODAL BELUL A KEK ABLAK----- */}
+
+
+            
+            <Icon
+            style={styles.hidemodalbutton, styles.hidemodalbuttonClose}
+  reverse
+  name='ios-backspace'
+  type='ionicon'
+  color='#517fa4'
+  
+  onPress={() => {
+    setModalVisible(false);
+    setActiveModalId(null);
+  }}
+/>
+  {/*          <Pressable
+              style={[styles.hidemodalbutton, styles.hidemodalbuttonClose]}
+              onPress={() => {
+                  setModalVisible(false);
+                  setActiveModalId(null);
+                }}
+            >
+                
+        
+              <Text style={styles.textmodalhide}>Hide Modal</Text>  
+             
+              
+               
+            </Pressable>
+          */} 
+            <Pressable
+              style={[styles.kivalasztasbutton, styles.kivalasztasbuttonClose]}
+              onPress={() => {
+                  setModalVisible(false);
+                  setActiveModalId(null);
+                  
+                  
+                }}
+            >
+               
+              {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
+              
+              
+              <Text style={styles.textmodalkivalasztas}>Kiválasztás</Text>
+              
+               
+            </Pressable>
+ 
+          </View>
+        </View>
+      </Modal>
+      {/*------------Modal megnyitása */}
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => {
+          setModalVisible(true);
+          setActiveModalId(item.ajanlat_id);
+          //setSelectedImage(item.ajanlat_kep);
+        }}
+        
+      >
+      
+        <Text style={styles.textStyle}> {item.ajanlat_nev}</Text>
+        <Text style={styles.textarStyle} > {item.ajanlat_ar} Ft </Text>
+        <Image
+        style={styles.image}
+        source={{uri:'http://192.168.6.8:3000/'+item.ajanlat_kep}}
      
-      
-       
-      
+        />
+        
+      </Pressable>
+      <Text>{"\n"}</Text>
 
    </View>
     );
   };
-  
+
+
+
+
   
   const ItemSeparatorView = () => {
     return (
@@ -157,10 +254,10 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
   modalView: {
-    margin: 20,
+    margin: 25,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
+    padding: 110,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -171,21 +268,80 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
+  // Modalon belul hide es kivalasztas gomb
+  textmodalhide:{
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlign: "left",
+    fontSize: 10
+  },
+  hidemodalbutton:{
+    borderRadius: 20,
+    padding: 10,
+    elevation: 5,
+    position:'absolute',
+    right:5,
+    top:'10%'
+  },
+  hidemodalbuttonClose:{
+    backgroundColor: "#2196F3",
+    padding: 10,
+  },
+  textmodalkivalasztas:{
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+    textAlign: "left",
+    fontSize: 18
+  },
+  kivalasztasbutton:{
+    
+    borderRadius: 20,
+    padding: 10,
+    elevation: 5,
+    position:'absolute',
+    
+    top:'230%'
+  },
+  kivalasztasbuttonClose:{
+    backgroundColor: "#2196F3",
+    padding: 15,
+  },
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2
   },
   buttonOpen: {
-    backgroundColor: "#68BBE3",
+    backgroundColor: "lightblue",
   },
   buttonClose: {
     backgroundColor: "#2196F3",
+    padding: 10,
+    
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    textAlign: "left",
+    fontSize: 20
+  },
+  textarStyle:{
+    color:"black",
+    fontWeight:"bold",
+    textAlign:"right",
+    
+  },
+  modaltextar:{
+    fontSize: 20,
+    top:'120%'
+  },
+  image:{
+ width: 300,
+ height: 150,
+ borderRadius: 20
   },
   modalText: {
     marginBottom: 15,
