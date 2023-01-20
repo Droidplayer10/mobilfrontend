@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ImageModal from 'react-native-image-modal';
+const IP = require('../IPcim');
 
 
 
@@ -16,7 +17,7 @@ import {
   Alert, Modal, Pressable
 } from 'react-native';
 
-const App = () => {
+const Foglalas = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [ActiveModalId,setActiveModalId]=useState(null);
   const [SelectedImage,setSelectedImage] = useState(null);
@@ -25,7 +26,7 @@ const App = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.6.8:3000/orszagok')
+    fetch(IP.ipcim+'orszagok')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -240,4 +241,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App;
+export default Foglalas;

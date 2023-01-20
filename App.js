@@ -11,6 +11,7 @@ import ProfileScreen from './Screens/ProfileScreen';
 import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import AjanlatScreen from './Screens/AjanlatScreen';
+import KivalasztasScreen from './Screens/KivalasztasScreen';
 
 
 
@@ -24,6 +25,7 @@ function AjanlatStackScreen() {
     }}>
      
       <AjanlatStack.Screen name="Ajanlat" component={AjanlatScreen} />
+      <AjanlatScreen.Screen name="kivalasztas" component={KivalasztasScreen} />
    
     </AjanlatStack.Navigator>
   );
@@ -40,7 +42,7 @@ function HomeStackScreen() {
       headerShown: false
     }}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Auto" component={FoglalasScreen} />
+      <HomeStack.Screen name="Foglalas" component={FoglalasScreen} />
    
     </HomeStack.Navigator>
   );

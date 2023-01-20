@@ -2,7 +2,8 @@ import React, { useState, useEffect, Component } from 'react';
 import ImageModal from 'react-native-image-modal';
 import { Icon } from 'react-native-elements';
 import FoglalasScreen from './FoglalasScreen';
-
+import KivalasztasScreen from './KivalasztasScreen';
+const IP = require('../IPcim');
 
 
 
@@ -28,7 +29,7 @@ const Ajanlat = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.6.8:3000/ajanlat')
+    fetch('http://192.168.1.121:3000/ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -62,18 +63,10 @@ const Ajanlat = () => {
     }
   };
 
-  const Varosok = props => {
-    return (
-      <View>
-        <Text> {props.name}</Text>
-        
-      </View>
-    );
-  };
     
       // Flat List Item
 
-  {/* <Varosok name={item.ajanlat_nev}  /> */} 
+
 
   const ItemView = ({ item }) => {
    
@@ -97,51 +90,20 @@ const Ajanlat = () => {
         <View style={styles.centeredView}>
           {/* -----MODAL ABLAK------- */}
           <View style={styles.modalView}>
-            
-
-
-
 
             <Text style={styles.modaltextar}> {item.ajanlat_ar} Ft </Text> 
-  
-  <Text style={{color: "black"}}> {item.ajanlat_leiras}  </Text>
+            <Text style={{color: "black"}}> {item.ajanlat_leiras}  </Text>
     
             {/* -----MODAL BELUL A KEK ABLAK----- */}
 
 
-            
-            <Icon
-            style={styles.hidemodalbutton, styles.hidemodalbuttonClose}
-  reverse
-  name='ios-backspace'
-  type='ionicon'
-  color='#517fa4'
-  
-  onPress={() => {
-    setModalVisible(false);
-    setActiveModalId(null);
-  }}
-/>
-  {/*          <Pressable
-              style={[styles.hidemodalbutton, styles.hidemodalbuttonClose]}
-              onPress={() => {
-                  setModalVisible(false);
-                  setActiveModalId(null);
-                }}
-            >
-                
-        
-              <Text style={styles.textmodalhide}>Hide Modal</Text>  
-             
-              
-               
-            </Pressable>
-          */} 
+          
             <Pressable
               style={[styles.kivalasztasbutton, styles.kivalasztasbuttonClose]}
               onPress={() => {
                   setModalVisible(false);
                   setActiveModalId(null);
+                  navigation.navigate('kivalasztas')
                   
                   
                 }}
@@ -164,7 +126,7 @@ const Ajanlat = () => {
         onPress={() => {
           setModalVisible(true);
           setActiveModalId(item.ajanlat_id);
-          //setSelectedImage(item.ajanlat_kep);
+          
         }}
         
       >
@@ -173,7 +135,7 @@ const Ajanlat = () => {
         <Text style={styles.textarStyle} > {item.ajanlat_ar} Ft </Text>
         <Image
         style={styles.image}
-        source={{uri:'http://192.168.6.8:3000/'+item.ajanlat_kep}}
+        source={{uri:IP+item.ajanlat_kep}}
      
         />
         
