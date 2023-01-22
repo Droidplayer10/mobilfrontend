@@ -9,7 +9,7 @@ const IP = require('../IPcim');
 
 
 
-// import all the components we are going to use
+// import all the componaents we are going to use
 import {
   SafeAreaView,
   Text,
@@ -76,6 +76,7 @@ const Ajanlat = () => {
      
       // Flat List Item
    <View>
+    
     {/*-----------MODAL TULAJDONSÁGAI -------------*/}
      <Modal
        animationType="slide"
@@ -110,6 +111,7 @@ const Ajanlat = () => {
                   
                 }}
             >
+              
                
               {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
               

@@ -2,6 +2,7 @@ import React, {component} from 'react';
 import { Button, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { withNavigation } from 'react-navigation';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -25,11 +26,7 @@ function AjanlatStackScreen() {
     }}>
      
       <AjanlatStack.Screen name="Ajanlat" component={AjanlatScreen} />
-      <AjanlatStack.Screen 
-  name="Kivalasztas" 
-  component={KivalasztasScreen} 
- 
-/>
+      <AjanlatStack.Screen name="Kivalasztas" component={KivalasztasScreen} />
    
     </AjanlatStack.Navigator>
   );
