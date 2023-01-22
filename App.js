@@ -25,7 +25,11 @@ function AjanlatStackScreen() {
     }}>
      
       <AjanlatStack.Screen name="Ajanlat" component={AjanlatScreen} />
-      <AjanlatScreen.Screen name="kivalasztas" component={KivalasztasScreen} />
+      <AjanlatStack.Screen 
+  name="Kivalasztas" 
+  component={KivalasztasScreen} 
+ 
+/>
    
     </AjanlatStack.Navigator>
   );

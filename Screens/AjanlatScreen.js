@@ -3,6 +3,7 @@ import ImageModal from 'react-native-image-modal';
 import { Icon } from 'react-native-elements';
 import FoglalasScreen from './FoglalasScreen';
 import KivalasztasScreen from './KivalasztasScreen';
+import { useNavigation } from '@react-navigation/native';
 const IP = require('../IPcim');
 
 
@@ -21,6 +22,7 @@ import {
 } from 'react-native';
 
 const Ajanlat = () => {
+  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [ActiveModalId,setActiveModalId]=useState(null);
   const [SelectedImage,setSelectedImage] = useState(null);
@@ -102,8 +104,8 @@ const Ajanlat = () => {
               style={[styles.kivalasztasbutton, styles.kivalasztasbuttonClose]}
               onPress={() => {
                   setModalVisible(false);
-                  setActiveModalId(null);
-                  navigation.navigate('kivalasztas')
+                   setActiveModalId(null);
+                  navigation.navigate('Kivalasztas')
                   
                   
                 }}

@@ -27,19 +27,19 @@ export default class Home extends React.Component {
 
          <View style={styles.alternativeLayoutButtonContainer}>
           <Button style={styles.Button}
-            onPress={() =>this.props.navigation.navigate('Auto')}
+            onPress={() =>this.props.navigation.navigate('Foglalas')}
             Component={FoglalasScreen}
             title="Foglalás"
             color="blue"
           />
         <Button style={styles.Button}
-            onPress={() =>this.props.navigation.navigate('Auto')}
+            onPress={() =>this.props.navigation.navigate('Foglalas')}
             Component={FoglalasScreen}
             title="Szoba"
             color="blue"
           />
         <Button style={styles.Button}
-            onPress={() =>this.props.navigation.navigate('Auto')}
+            onPress={() =>this.props.navigation.navigate('Foglalas')}
             Component={FoglalasScreen}
             title="Autó"
             color="blue"
