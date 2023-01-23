@@ -22,85 +22,72 @@ const IP = require('../IPcim');
  
 export default function Login({navigation}) {
   const [felhasznalo_id, setfelhasznalo_id] = useState("");
-  const [password, setPassword] = useState("");
- 
-
-
-
+  const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
   
-async function Handlelogin() {
-  try{
-    const seen = new WeakSet();
-    const body = JSON.stringify({felhasznalo_id:felhasznalo_id},
-     ( key, value) =>{
-        if(typeof value === 'object' && value !== null){
-          if(seen.has(value)){
-            return;
-          }
-          seen.add(value);
-        }
-        return value;
-      });
-    const response = await axios.post('http://192.168.6.8:3000/felhasznalok',
-    body,
-    {
-      headers:{
-        'Content-Type':'application/json'
-      }
-    });
-    const data= response.data;
-    if(data.success ){
-alert("Hello! Sikeres bejelentkezés!")
-navigation.navigate('Home')
-    }
-    else{
+  async function Handlelogin() {
+  try {
+  const body = JSON.stringify({ felhasznalo_id: felhasznalo_id, felhasznalo_jelszo: felhasznalo_jelszo });
+  //---------------------POSTOLJA az adatokat a backendnek, ami leellenorzi, hogy letezik e ilyen ID majd visszadobja a const databa. Mivel visszadob adatokat, igy a message-t.
+  // --------------------- Viszont ha van res.status pl.: 401-es hiba, akkor nem dob vissza semmit, igy if-be nem lehet használni se a res.statust se a data.message-t MEGOLDANDÓ
+  const response = await axios.post('http://192.168.1.121:3000/felhasznalok',
+  body,
+  {
+  headers: {
+  'Content-Type': 'application/json'
+  }
+  });
+  const data = response.data;
+  if (data.message === "Sikeres bejelentkezés!") {
+  alert("Hello! Bejelentkeztél!")
+  navigation.navigate('Ajanlat')
+  }
+  else {
+    /*if (res.status == 401  ) {
       alert("Sikertelen")
-    }
-  }
-  catch(error){
-    console.error(error)
-  }
-}
+    }*/
 
+  alert("Sikertelen")
+  
+  }
 
+  }
+  catch (error) {
+  console.error(error)
+  }
+  }
+  
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require("./repulo.png")} />
+  <View style={styles.container}>
+  <Image style={styles.image} source={require("./repulo.png")} />
  
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email."
-          placeholderTextColor="#003f5c"
-          onChangeText={(felhasznalo_id) => setfelhasznalo_id(felhasznalo_id)}
-        />
-      </View>
- 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password."
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-      </View>
- 
-      <TouchableOpacity >
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
- 
-      <TouchableOpacity style={styles.loginBtn} onPress={Handlelogin}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-      
-  
-  
-  
-  
-  
-    </View>
+  <StatusBar style="auto" />
+  <View style={styles.inputView}>
+    <TextInput
+      style={styles.TextInput}
+      placeholder="Email."
+      placeholderTextColor="#003f5c"
+      onChangeText={(felhasznalo_id) => setfelhasznalo_id(felhasznalo_id)}
+    />
+  </View>
+
+  <View style={styles.inputView}>
+    <TextInput
+      style={styles.TextInput}
+      placeholder="Password."
+      placeholderTextColor="#003f5c"
+      secureTextEntry={true}
+      onChangeText={(felhasznalo_jelszo) => setfelhasznalo_jelszo(felhasznalo_jelszo)}
+    />
+  </View>
+
+  <TouchableOpacity>
+    <Text style={styles.forgot_button}>Forgot Password?</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={styles.loginBtn} onPress={Handlelogin}>
+    <Text style={styles.loginText}>LOGIN</Text>
+  </TouchableOpacity>
+</View>
   
   
   

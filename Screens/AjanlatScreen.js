@@ -31,7 +31,7 @@ const Ajanlat = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch(IP.ipcim+'ajanlat')
+    fetch('http://192.168.1.121:3000/ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
