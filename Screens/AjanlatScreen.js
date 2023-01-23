@@ -31,7 +31,7 @@ const Ajanlat = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.121:3000/ajanlat')
+    fetch(IP.ipcim+'ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -81,6 +81,7 @@ const Ajanlat = () => {
      <Modal
        animationType="slide"
        transparent={true}
+       
        visible={ActiveModalId === item.ajanlat_id && modalVisible}
        onRequestClose={() => {
          Alert.alert("Modal has been closed.");
@@ -95,7 +96,12 @@ const Ajanlat = () => {
           <View style={styles.modalView}>
 
             <Text style={styles.modaltextar}> {item.ajanlat_ar} Ft </Text> 
+            <View style={{flex: 5}}>
+
             <Text style={{color: "black"}}> {item.ajanlat_leiras}  </Text>
+
+            </View>
+           
     
             {/* -----MODAL BELUL A KEK ABLAK----- */}
 
@@ -139,7 +145,7 @@ const Ajanlat = () => {
         <Text style={styles.textarStyle} > {item.ajanlat_ar} Ft </Text>
         <Image
         style={styles.image}
-        source={{uri:IP+item.ajanlat_kep}}
+        source={{uri:IP.ipcim+item.ajanlat_kep}}
      
         />
         
