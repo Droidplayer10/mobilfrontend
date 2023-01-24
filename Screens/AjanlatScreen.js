@@ -31,7 +31,7 @@ const Ajanlat = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    fetch('http://192.168.1.121:3000/ajanlat')
+    fetch('http://192.168.6.8:3000/ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -96,11 +96,11 @@ const Ajanlat = () => {
           <View style={styles.modalView}>
 
             <Text style={styles.modaltextar}> {item.ajanlat_ar} Ft </Text> 
-            <View style={{flex: 5}}>
+          {/*   <View style={{flex: 1}}> */}
 
             <Text style={{color: "black"}}> {item.ajanlat_leiras}  </Text>
 
-            </View>
+          {/*   </View> */}
            
     
             {/* -----MODAL BELUL A KEK ABLAK----- */}
@@ -115,16 +115,12 @@ const Ajanlat = () => {
                   navigation.navigate('Kivalasztas')
                   
                   
-                }}
-            >
-              
-               
+                }}>
+
               {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
               
-              
               <Text style={styles.textmodalkivalasztas}>Kiválasztás</Text>
-              
-               
+             
             </Pressable>
  
           </View>
@@ -245,7 +241,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
-    textAlign: "left",
+    
     fontSize: 10
   },
   hidemodalbutton:{
@@ -271,10 +267,10 @@ const styles = StyleSheet.create({
     
     borderRadius: 20,
     padding: 10,
-    elevation: 5,
-    position:'absolute',
+    elevation: 2,
+    position:'relative',
     
-    top:'230%'
+    top:'10%'
   },
   kivalasztasbuttonClose:{
     backgroundColor: "#2196F3",
