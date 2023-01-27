@@ -32,7 +32,7 @@ export default function Profile() {
   const body = JSON.stringify({ felhasznalo_id: felhasznalo_id, felhasznalo_jelszo: felhasznalo_jelszo });
   //---------------------POSTOLJA az adatokat a backendnek, ami leellenorzi, hogy letezik e ilyen ID majd visszadobja a const databa. Mivel visszadob adatokat, igy a message-t.
   // --------------------- Viszont ha van res.status pl.: 401-es hiba, akkor nem dob vissza semmit, igy if-be nem lehet használni se a res.statust se a data.message-t MEGOLDANDÓ
-  const response = await axios.post('http://192.168.1.121:3000/felhasznalok',
+  const response = await axios.post('http://192.168.6.8:3000/felhasznalok',
   body,
   {
   headers: {
@@ -40,6 +40,10 @@ export default function Profile() {
   }
   });
   const data = response.data;
+  if (data.message>=0){
+    alert("Üdv "+data.message)
+  }
+  /*
   if (data.message === "Sikeres bejelentkezés!") {
   alert("Hello! Bejelentkeztél!")
   navigation.navigate('BejelentkezettProfileScreen',{
@@ -48,14 +52,14 @@ export default function Profile() {
   
   }
   else {
-    /*if (res.status == 401  ) {
-      alert("Sikertelen")
-    }*/
+    //if (res.status == 401  ) {
+      //alert("Sikertelen")
+    }
 
   alert("Sikertelen")
   
   }
-
+*/
   }
   catch (error) {
   console.error(error)
