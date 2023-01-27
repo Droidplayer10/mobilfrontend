@@ -13,6 +13,8 @@ import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import AjanlatScreen from './Screens/AjanlatScreen';
 import KivalasztasScreen from './Screens/KivalasztasScreen';
+import BejelentkezettProfileScreen from './Screens/BejelentkezettProfileScreen';
+
 
 
 
@@ -70,6 +72,8 @@ function ProfileStackScreen() {
       headerShown: false
     }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="BejelentkezettProfileScreen" component={BejelentkezettProfileScreen } />
+      
     
     </ProfileStack.Navigator>
   );

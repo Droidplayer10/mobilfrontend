@@ -5,8 +5,12 @@ import FoglalasScreen from './FoglalasScreen';
 import { useRoute } from '@react-navigation/native';
 
 
-const Home = ({navigation}) => {
+const BejelentkezettProfileScreen = ({navigation}) => {
  
+ 
+const route = useRoute();
+const felhasznalo_id = route.params.felhasznalo_id;
+
 
 
 
@@ -14,16 +18,16 @@ const Home = ({navigation}) => {
     <View style={styles.container}>
 
 
-
+      <Text>{felhasznalo_id}</Text>
      
-
-      <View style={styles.alternativeLayoutButtonContainer}>
-        <Button
+      <Button
           style={styles.Button}
           onPress={() => navigation.navigate('Foglalas')}
           title="Foglalás"
           color="blue"
         />
+      
+       
         <Button
           style={styles.Button}
           onPress={() => navigation.navigate('Foglalas')}
@@ -36,7 +40,7 @@ const Home = ({navigation}) => {
           title="Autó"
           color="blue"
         />
-      </View>
+      
     </View>
   );
 }
@@ -51,11 +55,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     margin: 20
   },
-  alternativeLayoutButtonContainer: {
-    margin: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
+
 });
 
-export default Home;
+export default BejelentkezettProfileScreen;

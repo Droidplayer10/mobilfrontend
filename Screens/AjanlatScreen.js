@@ -3,7 +3,7 @@ import ImageModal from 'react-native-image-modal';
 import { Icon } from 'react-native-elements';
 import FoglalasScreen from './FoglalasScreen';
 import KivalasztasScreen from './KivalasztasScreen';
-import { useNavigation } from '@react-navigation/native';
+
 const IP = require('../IPcim');
 
 
@@ -22,13 +22,15 @@ import {
 } from 'react-native';
 
 const Ajanlat = () => {
-  const navigation = useNavigation();
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [ActiveModalId,setActiveModalId]=useState(null);
-  const [SelectedImage,setSelectedImage] = useState(null);
+  
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+
+  
 
   useEffect(() => {
     fetch('http://192.168.1.121:3000/ajanlat')
@@ -174,8 +176,14 @@ const Ajanlat = () => {
   };
 
   return (
+    
+
+
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+    
+      
+
         <TextInput
           style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
           onChangeText={(text) => searchFilterFunction(text)}

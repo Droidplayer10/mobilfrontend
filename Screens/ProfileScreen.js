@@ -13,16 +13,19 @@ import axios from 'axios';
 import { NavigationContainer } from "@react-navigation/native";
 import{createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
+import BejelentkezettProfileScreen from "./BejelentkezettProfileScreen";
 import { id } from "postcss-selector-parser";
 const IP = require('../IPcim');
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
  
-export default function Login({navigation}) {
+export default function Profile() {
   const [felhasznalo_id, setfelhasznalo_id] = useState("");
   const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
+  const navigation = useNavigation();
   
   async function Handlelogin() {
   try {
@@ -39,7 +42,10 @@ export default function Login({navigation}) {
   const data = response.data;
   if (data.message === "Sikeres bejelentkezés!") {
   alert("Hello! Bejelentkeztél!")
-  navigation.navigate('Ajanlat')
+  navigation.navigate('BejelentkezettProfileScreen',{
+     felhasznalo_id
+  })
+  
   }
   else {
     /*if (res.status == 401  ) {
