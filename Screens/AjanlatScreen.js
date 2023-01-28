@@ -3,6 +3,7 @@ import ImageModal from 'react-native-image-modal';
 import { Icon } from 'react-native-elements';
 import FoglalasScreen from './FoglalasScreen';
 import KivalasztasScreen from './KivalasztasScreen';
+import { useNavigation } from '@react-navigation/native';
 
 const IP = require('../IPcim');
 
@@ -25,15 +26,16 @@ const Ajanlat = () => {
   
   const [modalVisible, setModalVisible] = useState(false);
   const [ActiveModalId,setActiveModalId]=useState(null);
-  
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-
+ 
+ 
   
 
   useEffect(() => {
-    fetch('http://192.168.6.8:3000/ajanlat')
+    fetch('http://192.168.1.121:3000/ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -114,7 +116,9 @@ const Ajanlat = () => {
               onPress={() => {
                   setModalVisible(false);
                    setActiveModalId(null);
-                  navigation.navigate('Kivalasztas')
+                  navigation.navigate('Kivalasztas',{
+                    ajanlat_nev : item.ajanlat_nev
+                  })
                   
                   
                 }}>

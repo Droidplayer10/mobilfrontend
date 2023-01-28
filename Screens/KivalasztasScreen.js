@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { withNavigation, useRoute } from 'react-navigation';
 import DatePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 
@@ -19,7 +19,8 @@ import {
 const Kivalasztas = () => {
   const [date, setDate] = useState(new Date());
   const [ActiveDateVisible, setActiveDateVisible] = useState(false);
-
+const route = useRoute();
+const ajanlat_nev = route.params.item.ajanlat_nev;
 
 
 
@@ -30,6 +31,7 @@ function handleClose() {
   return(
     
 <View>
+  <Text>{ajanlat_nev}</Text>
 <Text>Melyik nap szeretne menni?</Text>
 
 <View  >
