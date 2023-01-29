@@ -12,8 +12,6 @@ const route = useRoute();
 const felhasznalo_id = route.params.felhasznalo_id;
 
 
-
-
   return (
     <View style={styles.container}>
 

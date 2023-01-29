@@ -214,7 +214,7 @@ const Ajanlat = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'whitez',
   },
   itemStyle: {
     padding: 10,

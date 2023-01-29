@@ -12,7 +12,7 @@ import {
 import axios from 'axios';
 import { NavigationContainer } from "@react-navigation/native";
 import{createStackNavigator} from '@react-navigation/stack';
-import HomeScreen from './HomeScreen';
+
 import BejelentkezettProfileScreen from "./BejelentkezettProfileScreen";
 import { id } from "postcss-selector-parser";
 const IP = require('../IPcim');
@@ -26,15 +26,6 @@ export default function Profile() {
   const [felhasznalo_id, setfelhasznalo_id] = useState("");
   const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
   const navigation = useNavigation();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
-
- const BejelentkezettProfileScreen = () => {
-    // Perform login logic here
-    setIsLoggedIn(true);
-    localStorage.setItem('isLoggedIn', true);
-  }
-
 
 
 
@@ -51,9 +42,11 @@ export default function Profile() {
   }
   });
   const data = response.data;
-  if (data.message>=0){
+  if (data.message=="Sikeres bejelentkezés!"){
     alert("Üdv "+data.message)
-    
+    navigation.navigate('BejelentkezettProfileScreen',{
+      felhasznalo_id
+   })
   }
   /*
   if (data.message === "Sikeres bejelentkezés!") {
