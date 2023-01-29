@@ -15,14 +15,14 @@ const felhasznalo_id = route.params.felhasznalo_id;
   return (
     <View style={styles.container}>
 
-
-      <Text>{felhasznalo_id}</Text>
+ 
+      <Text style={styles.textfelhasznalo_id}>{felhasznalo_id}</Text>
      
       <Button
           style={styles.Button}
           onPress={() => navigation.navigate('Foglalas')}
-          title="Foglalás"
-          color="blue"
+          title="Kedvencek"
+          color="#567189"
         />
       
        
@@ -30,13 +30,13 @@ const felhasznalo_id = route.params.felhasznalo_id;
           style={styles.Button}
           onPress={() => navigation.navigate('Foglalas')}
           title="Szoba"
-          color="blue"
+          color="#567189"
         />
         <Button
           style={styles.Button}
           onPress={() => navigation.navigate('Foglalas')}
-          title="Autó"
-          color="blue"
+          title="Előzmények"
+          color="#567189"
         />
       
     </View>
@@ -47,11 +47,19 @@ const styles = StyleSheet.create({
   container: {
    flex: 1,
    justifyContent: 'center',
-    padding: 24,
-    backgroundColor: "#eaeaea"
+    padding: 20,
+    backgroundColor: "#eaeaea",
+    
+  },
+  textfelhasznalo_id:{
+    justifyContent: 'center',
+    fontSize: 30
+
   },
   buttonContainer: {
-    margin: 20
+    flex: 1,
+    margin: 20,
+    justifyContent: 'space-between'
   },
 
 });

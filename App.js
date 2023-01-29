@@ -13,6 +13,7 @@ import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import AjanlatScreen from './Screens/AjanlatScreen';
 import KivalasztasScreen from './Screens/KivalasztasScreen';
+import RegisztracioScreen from './Screens/RegisztracioScreen';
 import BejelentkezettProfileScreen from './Screens/BejelentkezettProfileScreen';
 
 
@@ -68,11 +69,12 @@ const ProfileStack = createNativeStackNavigator();
 
 function ProfileStackScreen() {
   return(
-    <ProfileStack.Navigator screenOptions={{
+    <ProfileStack.Navigator  screenOptions={{
       headerShown: false
     }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
-      <ProfileStack.Screen name="BejelentkezettProfileScreen" component={BejelentkezettProfileScreen} />
+      <ProfileStack.Screen name="BejelentkezettProfileScreen" component={BejelentkezettProfileScreen}  />
+      <ProfileStack.Screen name="Regisztracio" component={RegisztracioScreen} />
       
     
     </ProfileStack.Navigator>
