@@ -12,40 +12,26 @@ import {
 import axios from 'axios';
 import { NavigationContainer } from "@react-navigation/native";
 import{createStackNavigator} from '@react-navigation/stack';
-import RegisztracioScreen from './RegisztracioScreen';
+
 import BejelentkezettProfileScreen from "./BejelentkezettProfileScreen";
 import { id } from "postcss-selector-parser";
-import KivalasztasScreen from "./KivalasztasScreen";
 const IP = require('../IPcim');
-<<<<<<< HEAD
-import { withNavigation } from 'react-navigation';
-
-
-=======
 import { useNavigation } from '@react-navigation/native';
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
+
 
 
 
 
  
-<<<<<<< HEAD
-const Login=({navigation})=> {
-  const [felhasznalo_id, setfelhasznalo_id] = useState("");
- const [felhasznalo_jelszo,setfelhasznalo_jelszo] = useState("")
-
-  
-=======
-export default function Profile() {
+export default function Regisztracio() {
   const [felhasznalo_id, setfelhasznalo_id] = useState("");
   const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
   const navigation = useNavigation();
 
-const HandleRegist = () =>{
-  navigation.navigate('Regisztracio')
+const HandleRegist =()=>{
+
 }
 
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
   async function Handlelogin() {
   try {
   const body = JSON.stringify({ felhasznalo_id: felhasznalo_id, felhasznalo_jelszo: felhasznalo_jelszo });
@@ -59,20 +45,11 @@ const HandleRegist = () =>{
   }
   });
   const data = response.data;
-<<<<<<< HEAD
-  if (data.message>=0){
-    
-    alert("Üdv "+data.message)
-    this.props.navigation.navigate('Ajanlat')
-    
-    //navigation.navigate('Ajanlat')
-=======
   if (data.message=="Sikeres bejelentkezés!"){
     alert("Üdv "+data.message)
     navigation.navigate('BejelentkezettProfileScreen',{
       felhasznalo_id
    })
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
   }
   /*
   if (data.message === "Sikeres bejelentkezés!") {
@@ -102,7 +79,10 @@ const HandleRegist = () =>{
   <Image style={styles.image} source={require("./repulo.png")} />
  
   <StatusBar style="auto" />
+  <Text>Adjon meg egy felhasználó nevet</Text>
+
   <View style={styles.inputView}>
+    
     <TextInput
       style={styles.TextInput}
       placeholder="ID"
@@ -110,27 +90,23 @@ const HandleRegist = () =>{
       onChangeText={(felhasznalo_id) => setfelhasznalo_id(felhasznalo_id)}
     />
   </View>
-
+  <Text>Adjon meg egy jelszót</Text>
   <View style={styles.inputView}>
     <TextInput
       style={styles.TextInput}
-      placeholder="Password"
+      placeholder="Jelszó"
       placeholderTextColor="#003f5c"
       secureTextEntry={true}
       onChangeText={(felhasznalo_jelszo) => setfelhasznalo_jelszo(felhasznalo_jelszo)}
     />
   </View>
 
-  <TouchableOpacity>
-    <Text style={styles.forgot_button}>Elfelejtetted a jelszót?</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={HandleRegist}>
-    <Text style={styles.forgot_button}>Regisztráció</Text>
+
+  <TouchableOpacity style={styles.loginBtn} onPress={HandleRegist}>
+    <Text style={{fontSize: 20}}>Regisztráció</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity style={styles.loginBtn} onPress={Handlelogin}>
-    <Text style={styles.loginText}>BEJELENTKEZÉS</Text>
-  </TouchableOpacity>
+ 
 </View>
   
   
@@ -182,4 +158,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#68BBE3",
   },
 });
-export default withNavigation(Login);

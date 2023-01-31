@@ -4,9 +4,8 @@ import { Icon } from 'react-native-elements';
 import FoglalasScreen from './FoglalasScreen';
 import KivalasztasScreen from './KivalasztasScreen';
 import { useNavigation } from '@react-navigation/native';
+
 const IP = require('../IPcim');
-import { NavigationContainer } from "@react-navigation/native";
-import{createStackNavigator} from '@react-navigation/stack';
 
 
 
@@ -24,13 +23,16 @@ import {
 } from 'react-native';
 
 const Ajanlat = () => {
-  const navigation = useNavigation();
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [ActiveModalId,setActiveModalId]=useState(null);
-  const [SelectedImage,setSelectedImage] = useState(null);
+  const navigation = useNavigation();
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
+ 
+ 
+  
 
   useEffect(() => {
     fetch('http://192.168.6.8:3000/ajanlat')
@@ -114,7 +116,9 @@ const Ajanlat = () => {
               onPress={() => {
                   setModalVisible(false);
                    setActiveModalId(null);
-                  navigation.navigate('Kivalasztas')
+                  navigation.navigate('Kivalasztas',{
+                    ajanlat_nev : item.ajanlat_nev
+                  })
                   
                   
                 }}>
@@ -172,10 +176,14 @@ const Ajanlat = () => {
   };
 
   return (
+    
+
+
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-<Text>this.props.felhasznalo_id</Text>
-        
+    
+      
+
         <TextInput
           style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
           onChangeText={(text) => searchFilterFunction(text)}
@@ -206,7 +214,7 @@ const Ajanlat = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'whitez',
   },
   itemStyle: {
     padding: 10,

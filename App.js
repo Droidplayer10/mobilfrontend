@@ -13,6 +13,9 @@ import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import AjanlatScreen from './Screens/AjanlatScreen';
 import KivalasztasScreen from './Screens/KivalasztasScreen';
+import RegisztracioScreen from './Screens/RegisztracioScreen';
+import BejelentkezettProfileScreen from './Screens/BejelentkezettProfileScreen';
+
 
 
 
@@ -66,12 +69,18 @@ const ProfileStack = createNativeStackNavigator();
 
 function ProfileStackScreen() {
   return(
-    <ProfileStack.Navigator screenOptions={{
+    <ProfileStack.Navigator  screenOptions={{
       headerShown: false
     }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+<<<<<<< HEAD
       <ProfileStack.Screen name="Kivalasztas" component={KivalasztasScreen} />
       <ProfileStack.Screen name="Ajanlat" component={AjanlatScreen} />
+=======
+      <ProfileStack.Screen name="BejelentkezettProfileScreen" component={BejelentkezettProfileScreen}  />
+      <ProfileStack.Screen name="Regisztracio" component={RegisztracioScreen} />
+      
+>>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
     
     </ProfileStack.Navigator>
   );
@@ -114,10 +123,47 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Ajanlatok" component={AjanlatStackScreen} />
-        <Tab.Screen name="Profile" component={ProfileStackScreen} />
-        <Tab.Screen name="Settings" component={SettingsStackScreen} />
+        <Tab.Screen name="Home" component={HomeStackScreen} 
+         options={{
+      headerStyle: {
+        backgroundColor: '#567189',
+      },
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}/>
+        <Tab.Screen name="Ajanlatok" component={AjanlatStackScreen}
+             options={{
+              headerStyle: {
+                backgroundColor: '#567189',
+              },
+              headerTintColor: 'white',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }} />
+        
+        <Tab.Screen name="Profile" component={ProfileStackScreen} 
+             options={{
+              headerStyle: {
+                backgroundColor: '#567189',
+              },
+              headerTintColor: 'white',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}/>
+        <Tab.Screen name="Settings" component={SettingsStackScreen}
+             options={{
+              headerStyle: {
+                backgroundColor: '#567189',
+              },
+              headerTintColor: 'white',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }} />
         
         
       </Tab.Navigator>
@@ -126,9 +172,6 @@ export default function App() {
     
     </NavigationContainer>
     
-
-    
-
 
   );
 }
