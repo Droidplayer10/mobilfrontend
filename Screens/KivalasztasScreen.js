@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'react-native';
+
 import { withNavigation } from 'react-navigation';
 import DatePicker from '@react-native-community/datetimepicker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   SafeAreaView,
@@ -12,8 +12,9 @@ import {
   FlatList,
   TextInput,
   TouchableOpacity,
-  Alert, Modal, Pressable, Image
+  Alert, Modal, Pressable, Image,
 } from 'react-native';
+import ProfileScreen from './ProfileScreen'
 
 
 const Kivalasztas = () => {
@@ -21,15 +22,20 @@ const Kivalasztas = () => {
   const [ActiveDateVisible, setActiveDateVisible] = useState(false);
 
 
-
-
 function handleClose() {
   setActiveDateVisible(false);
+}
+
+const ActiveUser = props =>{
+  return(
+    <Text>{this.props.felhasznalo_id}</Text>
+  )
 }
 
   return(
     
 <View>
+<ActiveUser />
 <Text>Melyik nap szeretne menni?</Text>
 
 <View  >
@@ -39,7 +45,8 @@ function handleClose() {
       onPress={() => setActiveDateVisible(true)}>
       <Text style={styles.selectDateBtnText}>Select date</Text>
     </TouchableOpacity>
-   
+       
+    
 
 
 

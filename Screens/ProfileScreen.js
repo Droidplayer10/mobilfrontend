@@ -14,15 +14,20 @@ import { NavigationContainer } from "@react-navigation/native";
 import{createStackNavigator} from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
 import { id } from "postcss-selector-parser";
+import KivalasztasScreen from "./KivalasztasScreen";
 const IP = require('../IPcim');
+import { withNavigation } from 'react-navigation';
+
+
 
 
 
 
  
-export default function Login({navigation}) {
+const Login=({navigation})=> {
   const [felhasznalo_id, setfelhasznalo_id] = useState("");
-  const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
+ const [felhasznalo_jelszo,setfelhasznalo_jelszo] = useState("")
+
   
   async function Handlelogin() {
   try {
@@ -38,7 +43,11 @@ export default function Login({navigation}) {
   });
   const data = response.data;
   if (data.message>=0){
+    
     alert("Üdv "+data.message)
+    this.props.navigation.navigate('Ajanlat')
+    
+    //navigation.navigate('Ajanlat')
   }
   /*
   if (data.message === "Sikeres bejelentkezés!") {
@@ -142,3 +151,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#68BBE3",
   },
 });
+export default withNavigation(Login);

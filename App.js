@@ -70,6 +70,8 @@ function ProfileStackScreen() {
       headerShown: false
     }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+      <ProfileStack.Screen name="Kivalasztas" component={KivalasztasScreen} />
+      <ProfileStack.Screen name="Ajanlat" component={AjanlatScreen} />
     
     </ProfileStack.Navigator>
   );

@@ -5,6 +5,8 @@ import FoglalasScreen from './FoglalasScreen';
 import KivalasztasScreen from './KivalasztasScreen';
 import { useNavigation } from '@react-navigation/native';
 const IP = require('../IPcim');
+import { NavigationContainer } from "@react-navigation/native";
+import{createStackNavigator} from '@react-navigation/stack';
 
 
 
@@ -172,6 +174,8 @@ const Ajanlat = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+<Text>this.props.felhasznalo_id</Text>
+        
         <TextInput
           style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
           onChangeText={(text) => searchFilterFunction(text)}
