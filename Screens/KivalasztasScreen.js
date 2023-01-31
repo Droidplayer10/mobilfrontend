@@ -19,27 +19,45 @@ import {
   TouchableOpacity,
   Alert, Modal, Pressable, Image,
 } from 'react-native';
+import Ajanlat from './AjanlatScreen';
 
 
 
-const Kivalasztas = () => {
+const Kivalasztas = ({route}) => {
   const [date, setDate] = useState(new Date());
-  const [ActiveDateVisible, setActiveDateVisible] = useState(false);
+  const [IsDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  
+  
+  const { itemajanlatnev } = route.params;
+  const {itemajanlatnapszama} = route.params;
+  
 
 
-function handleClose() {
-  setActiveDateVisible(false);
-}
+
+const showDatePicker = () => {
+  setIsDatePickerVisible(true);
+};
+const hideDatePicker = () => {
+  setIsDatePickerVisible(false);
+};
 
 
+const handleDateChange = (event, selectedDate) => {
+  hideDatePicker();
+  setDate(selectedDate || date);
+};
+
+
+const selectedDate = date;
+const returnDate = new Date(selectedDate.getTime() + itemajanlatnapszama * 24 * 60 * 60 * 1000);
 
   return(
     
 <View>
 
-<ActiveUser />
+<Text>{itemajanlatnev}</Text>
 
- 
+<Text></Text>
 
 <Text>Melyik nap szeretne menni?</Text>
 
@@ -47,20 +65,18 @@ function handleClose() {
 
 <TouchableOpacity 
       style={styles.selectDateBtn}
-      onPress={() => setActiveDateVisible(true)}>
-      <Text style={styles.selectDateBtnText}>Select date</Text>
+      onPress={showDatePicker}>
+      <Text style={styles.selectDateBtnText}>Válassz dátumot</Text>
     </TouchableOpacity>
-       
-    
-
-
-
+      
 </View>
 
 
 
-{ActiveDateVisible && (
+{IsDatePickerVisible && (
+  
   <View>
+    
 <DatePicker
         style={{width: 200}}
         value={date}
@@ -71,7 +87,7 @@ function handleClose() {
         minDate="2016-05-01"
         maxDate="2016-06-01"
         confirmBtnText="Confirm"
-        onCloseModal={handleClose}
+        onCloseModal={hideDatePicker}
         cancelBtnText="Cancel"
         customStyles={{
           dateIcon: {
@@ -86,7 +102,7 @@ function handleClose() {
           // ... You can check the source to find the other keys.
         }}
         
-        onChange={(event, selectedDate) => setDate(selectedDate)} 
+        onChange={handleDateChange} 
        
       />
 
@@ -96,10 +112,9 @@ function handleClose() {
 
 <Text>Kiválasztott dátum: {date.toLocaleDateString()}</Text>
 
+<Text>Hazamenet dátum: {returnDate.toLocaleDateString()}</Text>
 
 </View>
-  
-
 
   )
 
@@ -109,7 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(104, 187, 227, 0.5)',
     padding: 10,
     borderRadius: 20,
-    width: 100,
+    width: 150,
     height: 40,
     alignSelf: 'flex-start',
     marginTop:10
