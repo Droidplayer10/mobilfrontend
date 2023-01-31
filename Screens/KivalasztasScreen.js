@@ -1,11 +1,11 @@
 import React from 'react';
-<<<<<<< HEAD
+
 
 import { withNavigation } from 'react-navigation';
-=======
+
 import { Button } from 'react-native';
-import { withNavigation, useRoute } from 'react-navigation';
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
+import { useRoute } from 'react-navigation';
+
 import DatePicker from '@react-native-community/datetimepicker';
 import { useState, useEffect } from 'react';
 
@@ -19,33 +19,28 @@ import {
   TouchableOpacity,
   Alert, Modal, Pressable, Image,
 } from 'react-native';
-import ProfileScreen from './ProfileScreen'
+
 
 
 const Kivalasztas = () => {
   const [date, setDate] = useState(new Date());
   const [ActiveDateVisible, setActiveDateVisible] = useState(false);
-const route = useRoute();
-const ajanlat_nev = route.params.item.ajanlat_nev;
+
 
 function handleClose() {
   setActiveDateVisible(false);
 }
 
-const ActiveUser = props =>{
-  return(
-    <Text>{this.props.felhasznalo_id}</Text>
-  )
-}
+
 
   return(
     
 <View>
-<<<<<<< HEAD
+
 <ActiveUser />
-=======
-  <Text>{ajanlat_nev}</Text>
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
+
+ 
+
 <Text>Melyik nap szeretne menni?</Text>
 
 <View  >

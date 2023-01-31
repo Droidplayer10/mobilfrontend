@@ -69,18 +69,14 @@ const ProfileStack = createNativeStackNavigator();
 
 function ProfileStackScreen() {
   return(
-    <ProfileStack.Navigator  screenOptions={{
+    <ProfileStack.Navigator screenOptions={{
       headerShown: false
     }}>
       <ProfileStack.Screen name="Profile" component={ProfileScreen} />
-<<<<<<< HEAD
-      <ProfileStack.Screen name="Kivalasztas" component={KivalasztasScreen} />
-      <ProfileStack.Screen name="Ajanlat" component={AjanlatScreen} />
-=======
       <ProfileStack.Screen name="BejelentkezettProfileScreen" component={BejelentkezettProfileScreen}  />
       <ProfileStack.Screen name="Regisztracio" component={RegisztracioScreen} />
       
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
+
     
     </ProfileStack.Navigator>
   );
@@ -90,19 +86,22 @@ function ProfileStackScreen() {
 
 
 
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
 
-export default function App() {
+
+
+const App=()=> {
+  const Tab = createBottomTabNavigator();
 
   return (
 
 <NavigationContainer>
 
       <Tab.Navigator screenOptions={({ route }) => ({ 
+        
           
           tabBarIcon: ({ focused, color, size }) => {
-             
+        
+            
             let iconName;
 
             if (route.name === 'Home') {
@@ -175,7 +174,7 @@ export default function App() {
 
   );
 }
-
+export default App;
 
 
 

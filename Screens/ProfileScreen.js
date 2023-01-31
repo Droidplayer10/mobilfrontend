@@ -15,28 +15,12 @@ import{createStackNavigator} from '@react-navigation/stack';
 import RegisztracioScreen from './RegisztracioScreen';
 import BejelentkezettProfileScreen from "./BejelentkezettProfileScreen";
 import { id } from "postcss-selector-parser";
-import KivalasztasScreen from "./KivalasztasScreen";
 const IP = require('../IPcim');
-<<<<<<< HEAD
-import { withNavigation } from 'react-navigation';
-
-
-=======
 import { useNavigation } from '@react-navigation/native';
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
-
-
-
-
  
-<<<<<<< HEAD
-const Login=({navigation})=> {
-  const [felhasznalo_id, setfelhasznalo_id] = useState("");
- const [felhasznalo_jelszo,setfelhasznalo_jelszo] = useState("")
 
-  
-=======
-export default function Profile() {
+
+const Profile =()=> {
   const [felhasznalo_id, setfelhasznalo_id] = useState("");
   const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
   const navigation = useNavigation();
@@ -45,13 +29,12 @@ const HandleRegist = () =>{
   navigation.navigate('Regisztracio')
 }
 
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
-  async function Handlelogin() {
+async function Handlelogin() {
   try {
   const body = JSON.stringify({ felhasznalo_id: felhasznalo_id, felhasznalo_jelszo: felhasznalo_jelszo });
   //---------------------POSTOLJA az adatokat a backendnek, ami leellenorzi, hogy letezik e ilyen ID majd visszadobja a const databa. Mivel visszadob adatokat, igy a message-t.
   // --------------------- Viszont ha van res.status pl.: 401-es hiba, akkor nem dob vissza semmit, igy if-be nem lehet használni se a res.statust se a data.message-t MEGOLDANDÓ
-  const response = await axios.post('http://192.168.1.121:3000/felhasznalok',
+  const response = await axios.post('http://192.168.6.8:3000/felhasznalok',
   body,
   {
   headers: {
@@ -59,39 +42,20 @@ const HandleRegist = () =>{
   }
   });
   const data = response.data;
-<<<<<<< HEAD
-  if (data.message>=0){
-    
-    alert("Üdv "+data.message)
-    this.props.navigation.navigate('Ajanlat')
-    
-    //navigation.navigate('Ajanlat')
-=======
   if (data.message=="Sikeres bejelentkezés!"){
     alert("Üdv "+data.message)
     navigation.navigate('BejelentkezettProfileScreen',{
       felhasznalo_id
    })
->>>>>>> 741e55d95266532344d54664d15d2230fd9bcdc2
-  }
-  /*
-  if (data.message === "Sikeres bejelentkezés!") {
-  alert("Hello! Bejelentkeztél!")
-  navigation.navigate('BejelentkezettProfileScreen',{
-     felhasznalo_id
-  })
-  
   }
   else {
-    //if (res.status == 401  ) {
-      //alert("Sikertelen")
-    }
-
+    /*if (res.status == 401  ) {
+      alert("Sikertelen")
+    }*/
   alert("Sikertelen")
   
   }
-*/
-  }
+}
   catch (error) {
   console.error(error)
   }
@@ -110,7 +74,6 @@ const HandleRegist = () =>{
       onChangeText={(felhasznalo_id) => setfelhasznalo_id(felhasznalo_id)}
     />
   </View>
-
   <View style={styles.inputView}>
     <TextInput
       style={styles.TextInput}
@@ -132,6 +95,16 @@ const HandleRegist = () =>{
     <Text style={styles.loginText}>BEJELENTKEZÉS</Text>
   </TouchableOpacity>
 </View>
+
+
+    
+          
+            
+    
+
+          
+    
+    
   
   
   
@@ -182,4 +155,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#68BBE3",
   },
 });
-export default withNavigation(Login);
+export default Profile;

@@ -114,8 +114,9 @@ const Foglalas = () => {
               
                
             </Pressable>
- 
+            <Text>{item.orszag_id}</Text>
           </View>
+         
         </View>
       </Modal>
       {/*------------Modal megnyitása */}
