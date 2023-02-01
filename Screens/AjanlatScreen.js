@@ -7,9 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const IP = require('../IPcim');
 
-
-
-
 // import all the componaents we are going to use
 import {
   SafeAreaView,
@@ -30,12 +27,13 @@ const Ajanlat = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
- 
+  
+
  
   
 
   useEffect(() => {
-    fetch('http://192.168.6.8:3000/ajanlat')
+    fetch(IP.ipcim+'ajanlat')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -75,7 +73,7 @@ const Ajanlat = () => {
 
 
   const ItemView = ({ item }) => {
-   
+    
     return (
      
       // Flat List Item
@@ -117,7 +115,8 @@ const Ajanlat = () => {
                   setModalVisible(false);
                    setActiveModalId(null);
                   navigation.navigate('Kivalasztas',{
-                    ajanlat_nev : item.ajanlat_nev
+                    itemajanlatnev: item.ajanlat_nev,
+                    itemajanlatnap: item.ajanlat_nap
                   })
                   
                   
