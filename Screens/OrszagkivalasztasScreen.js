@@ -20,13 +20,13 @@ import { Platform } from 'react-native';
 
 
 
-const Kivalasztas = ({route}) => {
+const Orszagkivalasztas = ({route}) => {
   const [date, setDate] = useState(new Date());
   const [IsDatePickerVisible, setIsDatePickerVisible] = useState(false);
   
   
-  const { itemajanlatnev } = route.params;
-  const {itemajanlatnap} = route.params;
+
+  const {itemvarosnev} = route.params;
   
   
 
@@ -47,7 +47,6 @@ const handleDateChange = (event, selectedDate) => {
 
 
 const selectedDate = date;
-const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 60 * 1000);
 
   return(
     <NativeBaseProvider>
@@ -58,7 +57,7 @@ const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 
       <Center bg="secondary.300" _text={{
     color: 'white'
   }} rounded="xl" w={"90%"} h={24} >
-      {itemajanlatnev}
+      {itemvarosnev}
      
     </Center>
       
@@ -66,7 +65,7 @@ const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 
   
 
 
-<Text>{itemajanlatnev}</Text>
+<Text>{itemvarosnev}</Text>
 
 <Text></Text>
 
@@ -117,15 +116,46 @@ const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 
        
       />
 
+<DatePicker
+        style={{width: 200}}
+        value={date}
+  
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        minDate="2023-02-01"
+        maxDate="2023-06-10"
+        confirmBtnText="Confirm"
+        onCloseModal={hideDatePicker}
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        
+        onChange={handleDateChange} 
+       
+      />
+
       
 </View>      
 )}
 
 <Text>Kiválasztott dátum: {date.toLocaleDateString()}</Text>
 
-<Text>Hazamenet dátum: {returnDate.toLocaleDateString()}</Text>
 
 
+<Button size="lg" variant="solid" colorScheme="secondary" w={24}  >
+     Utazok!
+    </Button>
 </Center>
     </NativeBaseProvider>
   )
@@ -150,4 +180,4 @@ const styles = StyleSheet.create({
 
 // withNavigation returns a component that wraps MyBackButton and passes in the
 // navigation prop
-export default withNavigation(Kivalasztas);
+export default withNavigation(Orszagkivalasztas);

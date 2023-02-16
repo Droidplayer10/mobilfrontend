@@ -13,6 +13,7 @@ import HomeScreen from './Screens/HomeScreen';
 import SettingsScreen from './Screens/SettingsScreen';
 import AjanlatScreen from './Screens/AjanlatScreen';
 import KivalasztasScreen from './Screens/KivalasztasScreen';
+import OrszagkivalasztasScreen from './Screens/OrszagkivalasztasScreen';
 import RegisztracioScreen from './Screens/RegisztracioScreen';
 import BejelentkezettProfileScreen from './Screens/BejelentkezettProfileScreen';
 
@@ -47,6 +48,7 @@ function HomeStackScreen() {
     }}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
       <HomeStack.Screen name="Foglalas" component={FoglalasScreen} />
+      <HomeStack.Screen name="Orszagkivalasztas" component={OrszagkivalasztasScreen} />
    
     </HomeStack.Navigator>
   );

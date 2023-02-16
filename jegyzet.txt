@@ -1,0 +1,2 @@
+vegpont: adott varosok megjelenitese, sql: where varosok.orszag_id_nev == orszagok.orszag_id
+

@@ -4,19 +4,21 @@ import { Icon } from 'react-native-elements';
 import FoglalasScreen from './FoglalasScreen';
 import KivalasztasScreen from './KivalasztasScreen';
 import { useNavigation } from '@react-navigation/native';
-
+import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, ScrollView,Button, Circle,Flex, VStack,Switch } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 const IP = require('../IPcim');
 
 // import all the componaents we are going to use
 import {
   SafeAreaView,
-  Text,
+  
   StyleSheet,
   View,
   FlatList,
   TextInput,
   TouchableOpacity,
-  Alert, Modal, Pressable, Image
+  Alert, Modal, Pressable,
+  ImageBackground
 } from 'react-native';
 
 const Ajanlat = () => {
@@ -70,90 +72,108 @@ const Ajanlat = () => {
     
       // Flat List Item
 
+      const NBBox = props => {
+        return (
+          <VStack space={4} alignItems="center">
+           <Button borderBottomRadius={50} size={8} bg="primary.100" {...props}>
+          
+           </Button>
+           </VStack>
 
+
+        )
+      };
 
   const ItemView = ({ item }) => {
     
     return (
-     
-      // Flat List Item
-   <View>
-    
-    {/*-----------MODAL TULAJDONSÁGAI -------------*/}
-     <Modal
-       animationType="slide"
-       transparent={true}
-       
-       visible={ActiveModalId === item.ajanlat_id && modalVisible}
-       onRequestClose={() => {
-         Alert.alert("Modal has been closed.");
-         setModalVisible(false);
-         setActiveModalId(null);
-        
-        }}
-      >
-        {/*-----------MODAL TULAJDONSÁGAI VÉGE-------------*/}
-        <View style={styles.centeredView}>
-          {/* -----MODAL ABLAK------- */}
-          <View style={styles.modalView}>
-
-            <Text style={styles.modaltextar}> {item.ajanlat_ar} Ft </Text> 
-          {/*   <View style={{flex: 1}}> */}
-
-            <Text style={{color: "black"}}> {item.ajanlat_leiras}  </Text>
-
-          {/*   </View> */}
-           
-    
-            {/* -----MODAL BELUL A KEK ABLAK----- */}
-
-
+      <NativeBaseProvider>
+            <Center flex={1} px="3">
+            <ScrollView>
+      <Box alignItems="center">
+      <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+      borderColor: "coolGray.600",
+      backgroundColor: "gray.700"
+    }} _web={{
+      shadow: 2,
+      borderWidth: 0
+    }} _light={{
+      backgroundColor: "gray.50"
+    }}>
+        <Box>
+          <AspectRatio w="100%" ratio={16 / 9}>
+            <Image source={{
+            uri:IP.ipcim+item.ajanlat_kep
+          }} alt="image" />
+          </AspectRatio>
+          <Center bg="violet.500" _dark={{
+          bg: "violet.400"
+        }} _text={{
+          color: "warmGray.50",
+          fontWeight: "700",
+          fontSize: "xs"
+        }} position="absolute" bottom="0" px="3" py="1.5">
+            KÉPEK
+          </Center>
+        </Box>
+        <Stack p="4" space={3}>
+          <Stack space={2}>
+            <Heading size="md" ml="-1">
+              {item.ajanlat_nev}
+            </Heading>
           
-            <Pressable
-              style={[styles.kivalasztasbutton, styles.kivalasztasbuttonClose]}
-              onPress={() => {
-                  setModalVisible(false);
-                   setActiveModalId(null);
-                  navigation.navigate('Kivalasztas',{
-                    itemajanlatnev: item.ajanlat_nev,
-                    itemajanlatnap: item.ajanlat_nap
-                  })
-                  
-                  
-                }}>
-
-              {/* -----KÉK ABLAKON BELUL KIVÁLASZTÁS GOMB----- */}
-              
-              <Text style={styles.textmodalkivalasztas}>Kiválasztás</Text>
-             
-            </Pressable>
+            
+        
+     
  
-          </View>
-        </View>
-      </Modal>
-      {/*------------Modal megnyitása */}
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => {
-          setModalVisible(true);
-          setActiveModalId(item.ajanlat_id);
-          
-        }}
+            <Text fontSize="xs" _light={{
+            color: "violet.500"
+          }} _dark={{
+            color: "violet.400"
+          }} fontWeight="500" ml="-0.5" mt="-1">
+              {item.ajanlat_nap} napos a város szívében
+            </Text>
+          </Stack>
+          <Text fontWeight="400">
+          {item.ajanlat_leiras}
+          </Text>
+          <HStack alignItems="center" space={4} justifyContent="space-between">
+            <HStack alignItems="center">
+              <Text color="coolGray.600" _dark={{
+              color: "warmGray.200"
+            }} fontWeight="400">
+                {item.ajanlat_ar} Ft
+              </Text>
+              <Text>            </Text>
+              <Switch defaultIsChecked colorScheme="secondary"  />
+            </HStack>
+            <Button size="sm" variant="solid" colorScheme="secondary" onPress={()=>{
+               navigation.navigate('Kivalasztas',{
+                itemajanlatnev: item.ajanlat_nev,
+                itemajanlatnap: item.ajanlat_nap
+              })
+            }}>
+            Ezt választom
+          </Button>
+          </HStack>
+        </Stack>
         
-      >
+      </Box>
       
-        <Text style={styles.textStyle}> {item.ajanlat_nev}</Text>
-        <Text style={styles.textarStyle} > {item.ajanlat_ar} Ft </Text>
-        <Image
-        style={styles.image}
-        source={{uri:IP.ipcim+item.ajanlat_kep}}
-     
-        />
-        
-      </Pressable>
-      <Text>{"\n"}</Text>
+    </Box>
+    <NBBox borderColor="cyan.400" borderTopWidth="3" />
+    </ScrollView>
+    
+    <Text></Text>
+    
+    </Center>
+    
+    <Text></Text>
+    
+      
+          </NativeBaseProvider>
+          
 
-   </View>
     );
   };
 
@@ -179,7 +199,9 @@ const Ajanlat = () => {
 
 
     <SafeAreaView style={{ flex: 1 }}>
+      
       <View style={styles.container}>
+    
     
       
 
@@ -190,6 +212,7 @@ const Ajanlat = () => {
           underlineColorAndroid="transparent"
           placeholder="Keress itt"
         />
+         
         <FlatList
           data={filteredDataSource}
           keyExtractor={(item, index) => index.toString()}
@@ -203,8 +226,9 @@ const Ajanlat = () => {
 
 
       </View>
+      
     </SafeAreaView>
- 
+   
  
  
 

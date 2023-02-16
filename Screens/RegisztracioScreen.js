@@ -79,7 +79,20 @@ const HandleRegist =()=>{
   <Image style={styles.image} source={require("./repulo.png")} />
  
   <StatusBar style="auto" />
-  <Text>Adjon meg egy felhasználó nevet</Text>
+  <Text>Adja meg a nevét</Text>
+
+<View style={styles.inputView}>
+  
+  <TextInput
+    style={styles.TextInput}
+    placeholder="Név"
+    placeholderTextColor="#003f5c"
+    onChangeText={(felhasznalo_id) => setfelhasznalo_id(felhasznalo_id)}
+  />
+</View>
+
+
+  <Text>Adjon meg egy ID-t</Text>
 
   <View style={styles.inputView}>
     
@@ -95,6 +108,16 @@ const HandleRegist =()=>{
     <TextInput
       style={styles.TextInput}
       placeholder="Jelszó"
+      placeholderTextColor="#003f5c"
+      secureTextEntry={true}
+      onChangeText={(felhasznalo_jelszo) => setfelhasznalo_jelszo(felhasznalo_jelszo)}
+    />
+  </View>
+  <Text>Adja meg újra a jelszót</Text>
+  <View style={styles.inputView}>
+    <TextInput
+      style={styles.TextInput}
+      placeholder="Jelszó megerősítés"
       placeholderTextColor="#003f5c"
       secureTextEntry={true}
       onChangeText={(felhasznalo_jelszo) => setfelhasznalo_jelszo(felhasznalo_jelszo)}
@@ -137,7 +160,7 @@ const styles = StyleSheet.create({
   },
  
   TextInput: {
-    height: 50,
+    height: 100,
     flex: 1,
     padding: 10,
     marginLeft: 20,
