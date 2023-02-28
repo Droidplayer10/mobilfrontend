@@ -135,6 +135,7 @@ const Foglalas = () => {
 <TouchableOpacity onPress={()=>{
                 navigation.navigate('Orszagkivalasztas',{
                  itemvarosnev: item.varos_nev
+                
                })
              }}>
   <Text>

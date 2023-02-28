@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, ScrollView,Button, Circle,Flex, VStack,Switch } from "native-base";
+import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, ScrollView,Button, Circle,Flex, VStack,Switch,Input } from "native-base";
+import axios from 'axios';
 
 import { withNavigation,useRoute } from 'react-navigation';
 
@@ -23,13 +24,43 @@ import { Platform } from 'react-native';
 const Kivalasztas = ({route}) => {
   const [date, setDate] = useState(new Date());
   const [IsDatePickerVisible, setIsDatePickerVisible] = useState(false);
-  
+  const [ajanlathonnanvaros, setajanlathonnanvaros] = useState("");
   
   const { itemajanlatnev } = route.params;
   const {itemajanlatnap} = route.params;
+  const {itemajanlatvarosnev} = route.params;
   
-  
-
+  async function Utazom() {
+    try {
+    const body = JSON.stringify({ ajanlathonnanvaros: ajanlathonnanvaros, itemajanlatvarosnev: itemajanlatvarosnev, selectedDate: selectedDate, returnDate: returnDate });
+    //---------------------POSTOLJA az adatokat a backendnek, ami leellenorzi, hogy letezik e ilyen ID majd visszadobja a const databa. Mivel visszadob adatokat, igy a message-t.
+    // --------------------- Viszont ha van res.status pl.: 401-es hiba, akkor nem dob vissza semmit, igy if-be nem lehet használni se a res.statust se a data.message-t MEGOLDANDÓ
+    const response = await axios.post('http://192.168.6.8:3000/felvitel',
+    body,
+    {
+    headers: {
+    'Content-Type': 'application/json'
+    }
+    });
+    const data = response.data;
+    if (data.message=="Sikeres bejelentkezés!"){
+      alert("Üdv "+data.message)
+      navigation.navigate('BejelentkezettProfileScreen',{
+        felhasznalo_id
+     })
+    }
+    else {
+      /*if (res.status == 401  ) {
+        alert("Sikertelen")
+      }*/
+    alert("Sikertelen")
+    
+    }
+  }
+    catch (error) {
+    console.error(error)
+    }
+    }
 
 
 const showDatePicker = () => {
@@ -59,16 +90,28 @@ const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 
     color: 'white'
   }} rounded="xl" w={"90%"} h={24} >
       {itemajanlatnev}
+      
+
+
+     
+      
      
     </Center>
       
 
-  
 
-
-<Text>{itemajanlatnev}</Text>
 
 <Text></Text>
+
+<Text>Honnan: </Text>
+
+<Box alignItems="center">
+      <Input mx="3" placeholder="Város" w="50%" onChangeText={(ajanlathonnanvaros) => setajanlathonnanvaros(ajanlathonnanvaros)} />
+    </Box>
+
+<Text></Text>
+<Text>Úticél:</Text>
+<Text>{itemajanlatvarosnev}</Text>
 
 <Text>Melyik nap szeretne menni?</Text>
 
@@ -125,7 +168,18 @@ const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 
 
 <Text>Hazamenet dátum: {returnDate.toLocaleDateString()}</Text>
 
-
+<Text></Text>
+<Stack mb="2.5" mt="1.5" direction={{
+        base: "column",
+        md: "row"
+      }} space={2} mx={{
+        base: "auto",
+        md: "0"
+      }}>
+<Button size="lg" variant="solid" colorScheme="secondary" onPress={Utazom} >
+            Utazom!
+          </Button>
+</Stack>
 </Center>
     </NativeBaseProvider>
   )

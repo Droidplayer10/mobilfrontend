@@ -29,7 +29,9 @@ const Orszagkivalasztas = ({route}) => {
   const {itemvarosnev} = route.params;
   
   
+const felvitel=()=>{
 
+}
 
 
 const showDatePicker = () => {
@@ -54,12 +56,12 @@ const selectedDate = date;
 
 
 
-      <Center bg="secondary.300" _text={{
-    color: 'white'
-  }} rounded="xl" w={"90%"} h={24} >
-      {itemvarosnev}
+      <Box bg="primary.300"  _text={{
+    color: 'white',fontSize: "md"
+  }} rounded="xl" w={"60%"} h={24} >
+     Úticél:  {itemvarosnev}
      
-    </Center>
+    </Box>
       
 
   
@@ -153,7 +155,7 @@ const selectedDate = date;
 
 
 
-<Button size="lg" variant="solid" colorScheme="secondary" w={24}  >
+<Button size="lg" variant="solid" colorScheme="secondary" w={24} onPress={felvitel()} >
      Utazok!
     </Button>
 </Center>

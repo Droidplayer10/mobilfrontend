@@ -150,7 +150,8 @@ const Ajanlat = () => {
             <Button size="sm" variant="solid" colorScheme="secondary" onPress={()=>{
                navigation.navigate('Kivalasztas',{
                 itemajanlatnev: item.ajanlat_nev,
-                itemajanlatnap: item.ajanlat_nap
+                itemajanlatnap: item.ajanlat_nap,
+                itemajanlatvarosnev: item.ajanlat_varosnev
               })
             }}>
             Ezt választom
