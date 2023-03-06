@@ -44,10 +44,8 @@ const Kivalasztas = ({route}) => {
     });
     const data = response.data;
     if (data.message=="Sikeres bejelentkezés!"){
-      alert("Üdv "+data.message)
-      navigation.navigate('BejelentkezettProfileScreen',{
-        felhasznalo_id
-     })
+      alert("Sikeresen felvettük a rendelést! ")
+      
     }
     else {
       /*if (res.status == 401  ) {
