@@ -19,8 +19,8 @@ import KivalasztasScreen from './KivalasztasScreen';
 
 const Foglalas = () => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [ActiveModalId,setActiveModalId]=useState(null);
-  const [SelectedImage,setSelectedImage] = useState(null);
+  const [ActiveModalId, setActiveModalId] = useState(null);
+  const [SelectedImage, setSelectedImage] = useState(null);
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -30,7 +30,7 @@ const Foglalas = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetch(IP.ipcim+'orszagok')
+    fetch(IP.ipcim + 'orszagok')
       .then((response) => response.json())
       .then((responseJson) => {
         setFilteredDataSource(responseJson);
@@ -41,8 +41,8 @@ const Foglalas = () => {
       });
   }, []);
 
- 
- 
+
+
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank
@@ -66,11 +66,11 @@ const Foglalas = () => {
       setSearch(text);
     }
   };
- 
+
 
 
   const ItemView = ({ item }) => {
- 
+
     const searchFilterFunction2 = (text) => {
       // Check if searched text is not blank
       if (text) {
@@ -97,99 +97,99 @@ const Foglalas = () => {
 
 
     return (
-     
+
       // Flat List Item
-   <View>
-    {/*-----------MODAL TULAJDONSÁGAI -------------*/}
-     <Modal
-       animationType="slide"
-       transparent={true}
-       visible={ActiveModalId === item.orszag_id && modalVisible}
-       onRequestClose={() => {
-         Alert.alert("Modal has been closed.");
-         setModalVisible(false);
-         setActiveModalId(null);
-        
-        }}
-      >
-        {/*-----------MODAL TULAJDONSÁGAI VÉGE-------------*/}
-        <View style={styles.centeredView}>
-          {/* -----MODAL ABLAK------- */}
-          
-          <View style={styles.modalView}>
-          <Text>{item.orszag_nev}</Text>
-          <TextInput
-          style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
-          onChangeText={(text) => searchFilterFunction2(text)}
-          value={search2}
-          underlineColorAndroid="transparent"
-          placeholder="Keress itt"
-        />
+      <View>
+        {/*-----------MODAL TULAJDONSÁGAI -------------*/}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={ActiveModalId === item.orszag_id && modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(false);
+            setActiveModalId(null);
 
-<Text>
-  
-</Text>
-<Text>
-  
-</Text>
+          }}
+        >
+          {/*-----------MODAL TULAJDONSÁGAI VÉGE-------------*/}
+          <View style={styles.centeredView}>
+            {/* -----MODAL ABLAK------- */}
 
-<ScrollView>
-<TouchableOpacity onPress={()=>{
-                navigation.navigate(<KivalasztasScreen name={item.varos_nev} />,{
-                 itemvarosnev: item.varos_nev
-                
-               })
-             }}>
-  <Text>
-  {item.varos_nev}
-    </Text> 
-  </TouchableOpacity>
-</ScrollView>
+            <View style={styles.modalView}>
+              <Text>{item.orszag_nev}</Text>
+              <TextInput
+                style={{ height: 35, borderColor: "#68BBE3", borderWidth: 2, margin: 5, padding: 5, borderRadius: 20 }}
+                onChangeText={(text) => searchFilterFunction2(text)}
+                value={search2}
+                underlineColorAndroid="transparent"
+                placeholder="Keress itt"
+              />
+
+              <Text>
+
+              </Text>
+              <Text>
+
+              </Text>
+
+              <ScrollView>
+                <TouchableOpacity onPress={() => {
+                  navigation.navigate(<KivalasztasScreen name={item.varos_nev} />, {
+                    itemvarosnev: item.varos_nev
+
+                  })
+                }}>
+                  <Text>
+                    {item.varos_nev}
+                  </Text>
+                </TouchableOpacity>
+              </ScrollView>
 
 
 
-        
-  <Text></Text>
-            <Pressable
-              style={[styles.bezarasbutton, styles.buttonClose] }
-              onPress={() => {
+
+              <Text></Text>
+              <Pressable
+                style={[styles.bezarasbutton, styles.buttonClose]}
+                onPress={() => {
                   setModalVisible(false);
                   setActiveModalId(null);
                 }}
-            >
-           
-              <Text style={styles.textStyle}>X</Text>
-          
-              
-               
-            </Pressable>
-           
-           
-          </View>
-         
-        </View>
-      </Modal>
-      {/*------------Modal megnyitása */}
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => {
-          setModalVisible(true);
-          setActiveModalId(item.orszag_id);
-          setSelectedImage(item.orszag_kep);
-        }}
-        
-      >
-      
-        <Text style={styles.textStyle}> {item.orszag_nev}</Text>
-        
-      </Pressable>
-      <Text>{"\n"}</Text>
+              >
 
-   </View>
+                <Text style={styles.textStyle}>X</Text>
+
+
+
+              </Pressable>
+
+
+            </View>
+
+          </View>
+        </Modal>
+        {/*------------Modal megnyitása */}
+        <Pressable
+          style={[styles.button, styles.buttonOpen]}
+          onPress={() => {
+            setModalVisible(true);
+            setActiveModalId(item.orszag_id);
+            setSelectedImage(item.orszag_kep);
+          }}
+
+        >
+
+          <Text style={styles.textStyle}> {item.orszag_nev}</Text>
+
+        </Pressable>
+        <Text>{"\n"}</Text>
+
+      </View>
     );
   };
-  
-  
+
+
   const ItemSeparatorView = () => {
     return (
       // Flat List Item Separator
@@ -206,11 +206,11 @@ const Foglalas = () => {
   return (
 
 
-    
+
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <TextInput
-          style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
+          style={{ height: 35, borderColor: "#68BBE3", borderWidth: 2, margin: 5, padding: 5, borderRadius: 20 }}
           onChangeText={(text) => searchFilterFunction(text)}
           value={search}
           underlineColorAndroid="transparent"
@@ -221,20 +221,20 @@ const Foglalas = () => {
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
-          
+
         />
 
-{/* ---------------------------------------MODAAAAALLLLLLL*/ }
+        {/* ---------------------------------------MODAAAAALLLLLLL*/}
 
 
 
       </View>
     </SafeAreaView>
- 
- 
- 
 
- );
+
+
+
+  );
 };
 
 const styles = StyleSheet.create({
