@@ -26,7 +26,7 @@ const Profile=() => {
       <Center flex={1} px="3">
       <AspectRatio w="100%" ratio={16 / 9}>
         <Box alignItems="center" marginTop={10}>
-        <Image borderRadius={50} size={"xl"} source={require("./repulo.png")} alt="image" />
+        <Image borderRadius={50} size={"xl"} source={require("./repulo.jpg")} alt="image" />
         </Box>
           </AspectRatio>
           <InputButtons />
@@ -48,7 +48,7 @@ const InputButtons = () => {
     const body = JSON.stringify({ felhasznalo_id: felhasznalo_id, felhasznalo_jelszo: felhasznalo_jelszo });
     //---------------------POSTOLJA az adatokat a backendnek, ami leellenorzi, hogy letezik e ilyen ID majd visszadobja a const databa. Mivel visszadob adatokat, igy a message-t.
     // --------------------- Viszont ha van res.status pl.: 401-es hiba, akkor nem dob vissza semmit, igy if-be nem lehet használni se a res.statust se a data.message-t MEGOLDANDÓ
-    const response = await axios.post('http://192.168.6.8:3000/felhasznalok',
+    const response = await axios.post(IP.ipcim+'felhasznalok',
     body,
     {
     headers: {
@@ -60,7 +60,11 @@ const InputButtons = () => {
       alert("Üdv "+data.message)
       navigation.navigate('BejelentkezettProfileScreen',{
         felhasznalo_id
-     })
+     }),
+     navigation.setParams({
+      felhasznaloId: felhasznalo_id
+    })
+    
     }
     else {
       /*if (res.status == 401  ) {

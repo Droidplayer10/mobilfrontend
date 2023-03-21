@@ -3,6 +3,7 @@ import ImageModal from 'react-native-image-modal';
 const IP = require('../IPcim');
 import { useNavigation } from '@react-navigation/native';
 
+
 // import all the components we are going to use
 import {
   SafeAreaView,
@@ -14,6 +15,7 @@ import {
   TouchableOpacity,
   Alert, Modal, Pressable, ScrollView
 } from 'react-native';
+import KivalasztasScreen from './KivalasztasScreen';
 
 const Foglalas = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -133,7 +135,7 @@ const Foglalas = () => {
 
 <ScrollView>
 <TouchableOpacity onPress={()=>{
-                navigation.navigate('Orszagkivalasztas',{
+                navigation.navigate(<KivalasztasScreen name={item.varos_nev} />,{
                  itemvarosnev: item.varos_nev
                 
                })

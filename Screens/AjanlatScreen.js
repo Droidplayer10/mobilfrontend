@@ -113,7 +113,7 @@ const Ajanlat = () => {
           fontWeight: "700",
           fontSize: "xs"
         }} position="absolute" bottom="0" px="3" py="1.5">
-            KÉPEK
+            {item.ajanlat_varosnev}
           </Center>
         </Box>
         <Stack p="4" space={3}>
@@ -154,7 +154,7 @@ const Ajanlat = () => {
                 itemajanlatvarosnev: item.ajanlat_varosnev
               })
             }}>
-            Ezt választom
+            Részletek
           </Button>
           </HStack>
         </Stack>
@@ -202,17 +202,19 @@ const Ajanlat = () => {
     <SafeAreaView style={{ flex: 1 }}>
       
       <View style={styles.container}>
-    
-    
       
+<View style={styles.header}>
 
-        <TextInput
-          style={{height: 35, borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
+<TextInput
+          style={{height: 35,width:"95%", borderColor:"#68BBE3",borderWidth:2, margin:5, padding:5, borderRadius: 20}}
           onChangeText={(text) => searchFilterFunction(text)}
           value={search}
           underlineColorAndroid="transparent"
           placeholder="Keress itt"
         />
+
+</View>
+        
          
         <FlatList
           data={filteredDataSource}
@@ -240,6 +242,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'whitez',
   },
+  header:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#146C94',
+    height: 80,
+    
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40
+  }
+  
+  ,
   itemStyle: {
     padding: 10,
   },
