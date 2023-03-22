@@ -70,21 +70,6 @@ const Ajanlat = () => {
     }
   };
 
-    
-      // Flat List Item
-
-      const NBBox = props => {
-        return (
-          <VStack space={4} alignItems="center">
-           <Button borderBottomRadius={50} size={8} bg="primary.100" {...props}>
-          
-           </Button>
-           </VStack>
-
-
-        )
-      };
-
   const ItemView = ({ item }) => {
     
     return (
@@ -156,7 +141,7 @@ const Ajanlat = () => {
               })
             }}>
 
-            <Text> Részletek <MaterialIcons name="double-arrow" size={20}   />  </Text> 
+            <Text> Részletek <MaterialIcons name="double-arrow" size={21} />  </Text> 
             
           </Button>
           
@@ -169,6 +154,7 @@ const Ajanlat = () => {
     
     </ScrollView>
     
+    <Text></Text>
     <Text></Text>
     
     </Center>
