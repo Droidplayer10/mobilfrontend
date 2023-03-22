@@ -8,6 +8,7 @@ import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBa
 import { MaterialIcons } from "@expo/vector-icons";
 const IP = require('../IPcim');
 
+
 // import all the componaents we are going to use
 import {
   SafeAreaView,
@@ -154,15 +155,18 @@ const Ajanlat = () => {
                 itemajanlatvarosnev: item.ajanlat_varosnev
               })
             }}>
-            Részletek
+
+            <Text> Részletek <MaterialIcons name="double-arrow" size={20}   />  </Text> 
+            
           </Button>
+          
           </HStack>
         </Stack>
         
       </Box>
       
     </Box>
-    <NBBox borderColor="cyan.400" borderTopWidth="3" />
+    
     </ScrollView>
     
     <Text></Text>

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, ScrollView,Button, Circle,Flex, VStack,Switch,Input,ZStack } from "native-base";
+import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider, ScrollView,Button, Circle,Flex, VStack,Switch,Input,ZStack,alert } from "native-base";
 import axios from 'axios';
 const IP = require('../IPcim');
 import { withNavigation,useRoute, NavigationEvents } from 'react-navigation';
 import { useNavigation } from '@react-navigation/native';
 import DatePicker from '@react-native-community/datetimepicker';
 import { useState, useEffect } from 'react';
+
 
 import {
   
@@ -19,6 +20,7 @@ import {
 import Ajanlat from './AjanlatScreen';
 import { Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { set } from 'react-native-reanimated';
 
 
 
@@ -27,7 +29,7 @@ const Kivalasztas = ({route,navigation}) => {
   const [IsDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [ajanlathonnanvaros, setajanlathonnanvaros] = useState("");
   const [selectedValue, setSelectedValue] = useState();
-  
+  const [hiba,setHiba] =useState(false);
   const { itemajanlatnev } = route.params;
   const {itemajanlatnap} = route.params;
   const {itemajanlatvarosnev} = route.params;
@@ -35,15 +37,15 @@ const Kivalasztas = ({route,navigation}) => {
 
   // javitando dolog: felhasznaloId megszerzese, miutan bejelentkezett(route.params). Ha nem, akkor + mező hozzáadása,ami ellenőrzi, hogy be van-e jelentkezve vagy se(0 vagy 1). Akkor uj végpont letrehozasa szukseges(/ellenorzes)
 
-  async function Utazom({route}) {
+   async function Utazom() {
     //const {felhasznaloId} = route.params?.felhasznalo_id;
 
-   // if (felhasznaloId) {
+    //if (felhasznaloId) {
 
     if (ajanlathonnanvaros!="") {
       
     try {
-    const body = JSON.stringify({ felhasznaloId: felhasznaloId, ajanlathonnanvaros: ajanlathonnanvaros, itemajanlatvarosnev: itemajanlatvarosnev, selectedDate: selectedDate, returnDate: returnDate,selectedValue: selectedValue });
+    const body = JSON.stringify({ ajanlathonnanvaros: ajanlathonnanvaros, itemajanlatvarosnev: itemajanlatvarosnev, selectedDate: selectedDate, returnDate: returnDate,selectedValue: selectedValue });
     //---------------------POSTOLJA az adatokat a backendnek, ami leellenorzi, hogy letezik e ilyen ID majd visszadobja a const databa. Mivel visszadob adatokat, igy a message-t.
     // --------------------- Viszont ha van res.status pl.: 401-es hiba, akkor nem dob vissza semmit, igy if-be nem lehet használni se a res.statust se a data.message-t MEGOLDANDÓ
     const response = await axios.post(IP.ipcim+'felvitel',
@@ -66,7 +68,8 @@ const Kivalasztas = ({route,navigation}) => {
     }
   }
 else{
-  alert("Kérlek töltsd ki a mezőt!")
+  setHiba(true)
+ 
 }
   }
 //else{
@@ -97,7 +100,26 @@ const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 
     <NativeBaseProvider>
       <Center flex={1}>
 
-
+      <Stack>
+        
+  <Alert w="100%" status={error}>
+            <VStack space={2} flexShrink={1} w="100%">
+              <HStack flexShrink={1} space={2} justifyContent="space-between">
+                <HStack space={2} flexShrink={1}>
+                  <Alert.Icon mt="1" />
+                  <Text fontSize="md" color="coolGray.800">
+                    {status.title}
+                  </Text>
+                </HStack>
+                <IconButton variant="unstyled" _focus={{
+              borderWidth: 0
+            }} icon={<CloseIcon size="3" />} _icon={{
+              color: "coolGray.600"
+            }} />
+              </HStack>
+            </VStack>
+          </Alert>
+          </Stack>
 
       <Center bg="secondary.300" _text={{
     color: 'white'
