@@ -1,24 +1,23 @@
 vegpont: adott varosok megjelenitese, sql: where varosok.orszag_id_nev == orszagok.orszag_id
 
-hiba: nem viszi át a selectvalue értékét, illetve res.statussal tér vissza.
-hibakezelés frontenden: 
-        1.  route.params? = felhasznalo_id ellenorzese, ha kapott paramétert, akkor azt töltse fel az adatbázisba.
-        2.  Ha üres a Honnan input akkor jelezze a felhasználónak
+
+hibakezelés frontenden:
+        1. Hiba: kivalasztasmenurol atugrunk profilere, és ugy megyunk vissza kivalasztasra, akkor nem lehet menteni, atvisz megint a profile-ra.
+        frissiteni kell az oldalt(kivalasztasscreenrol visszagomb, talan home page is kell, azutan mar lehet menteni)
+        2. masik hiba: kijelentkezek, Bejelentkezel masikkal, akkor az elozo felhasznalo_id-t hasznalja, nem torli az async storage-bol a felhasznalo_id-t.
 
 ProfileScreen:
-        1.  Miután bejelentkezett, visszagomb tiltása vagy adatbazis ellenorzes, és ha be van jelentkezve(1 ember) érték: 1 akkor nincs profileScreen
-        2.  Bejelentkezes utan, route.params küldése a kivalasztasScreenre, ezzel eltudja menteni az utazasi szandekat
+        1.  Miután bejelentkezett, visszagomb tiltása
+        
 
 bejelentkezettProfileScreen:
-        1.  ha van olyan menu, ahol az utazasi szandekait lathatja, akkor profileScreen-rol route.params-ot oda is küldünk, és egy vegpontot csinalunk, ahol ellenorzi a bejelentkezett felhasznalo id-jat es azokat íratja ki.
-
+        1. visszagomb tiltása 
 
 regisztracioScreen:
         1.  Handlelogin fuggveny kicsi valtoztatassal
 
 ElfelejtetteajelszotScreen:
         1.  Id megadasaval (es neve?) backend reszen megnezi kinek van ilyen id-ja és majd kiíratja a jelszót vagy alertbe
-
 
 
 Peti:

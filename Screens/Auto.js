@@ -105,7 +105,7 @@ return (kecske[0])
 }*/}
 
 return (
-  <View style={{ flex: 1, padding: 1 , marginTop:40}}>  
+  <View style={{ flex: 1, padding: 1 }}>  
 <StatusBar barStyle='light-content'/>
 {isLoading ? <ActivityIndicator/> : (
   <FlatList
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width:25,
     borderRadius:10,
-    marginLeft:400,
+    marginLeft:40,
     marginRight:0
 
   },
