@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, ActivityIndicator, FlatList, Text, View, Image, TouchableOpacity,Linking, Button,TextInput } from 'react-native';
 //const ipcim="192.168.6.7:3000";
-const IP = require('./ipcim');
+const IP = require('../IPcim');
 
-export default class App extends Component {
+export default class Szalloda extends Component {
   constructor(props) {
     super(props);
     
@@ -81,7 +81,7 @@ export default class App extends Component {
               <Text style={{fontSize:30,color:'darkred',textAlign:'center'}}>
                 {item.szalloda_neve}
               </Text>
-              <Image   source={{uri:'http://192.168.6.7:3000/'+item.szalloda_kep}} style={{width:300,height:300,alignSelf:'center'}}   />
+              <Image   source={{uri:IP.ipcim+item.szalloda_kep}} style={{width:300,height:300,alignSelf:'center'}}   />
               <Text style={{fontSize:20,color:'dark',textAlign:'center'}}>
                 {item.auto_evjarat}
               </Text>

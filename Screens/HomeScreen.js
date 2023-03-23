@@ -53,9 +53,25 @@ resizeMode={"cover"}
         <TouchableOpacity
           style={styles.Button}
           onPress={() => navigation.navigate('Szalloda')}
-          
           >
+
+
+
+
+
           <Text style={styles.ButtonTitle}>Szállodák</Text>
+        </TouchableOpacity>
+        <Text></Text>
+        <TouchableOpacity
+          style={styles.Button}
+          onPress={() => navigation.navigate('Kereses')}
+          >
+
+
+
+
+            
+          <Text style={styles.ButtonTitle}>Kereső</Text>
         </TouchableOpacity>
         <Text></Text>
         <TouchableOpacity
@@ -106,11 +122,11 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   footer:{
-    flex:1,
+    flex:1.5,
     backgroundColor: 'white',
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    paddingVertical: 40,
+    paddingVertical: 80,
     paddingHorizontal: 27,
 
 
