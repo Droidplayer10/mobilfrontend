@@ -3,7 +3,7 @@ import { SearchBar } from 'react-native-elements';
 import { Button, StyleSheet, View,Text, ImageBackground } from 'react-native';
 import FoglalasScreen from './FoglalasScreen';
 import { useRoute } from '@react-navigation/native';
-import Szalloda from './Szalloda';
+
 import { TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { Dimensions } from 'react-native';
