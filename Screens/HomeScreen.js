@@ -43,7 +43,7 @@ resizeMode={"cover"}
         <View style={styles.alternativeLayoutButtonContainer} >
          <TouchableOpacity
           style={styles.Button}
-          onPress={() => navigation.navigate('Foglalas')}
+          onPress={() => navigation.navigate('MyScreen')}
           
           >
           <Text style={styles.ButtonTitle} >Repülőjegy foglalás</Text>
