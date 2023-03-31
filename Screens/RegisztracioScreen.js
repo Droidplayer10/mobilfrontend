@@ -76,7 +76,7 @@ const HandleRegist =()=>{
   
   return (
   <View style={styles.container}>
-  <Image style={styles.image} source={require("./repulo.jpg")} />
+  
  
   <StatusBar style="auto" />
   <Text>Adja meg a nevét</Text>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
  
   image: {
-    marginBottom: 40,
+    marginBottom: 4,
   },
  
   inputView: {
