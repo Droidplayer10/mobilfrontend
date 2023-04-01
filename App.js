@@ -19,7 +19,7 @@ import BejelentkezettProfileScreen from './Screens/BejelentkezettProfileScreen';
 import Szalloda from './Screens/PetiSzalloda';
 import Auto from './Screens/Auto';
 import Kereses from './Screens/Kereses';
-import MyScreen from './Screens/MyScreen';
+
 
 
 
@@ -51,7 +51,7 @@ function HomeStackScreen() {
     }}>
       <HomeStack.Screen name="Home" component={HomeScreen} />
       <HomeStack.Screen name="Foglalas" component={FoglalasScreen} />
-      <HomeStack.Screen name="MyScreen" component={MyScreen} />
+      
 
       <HomeStack.Screen name="Kivalasztas" component={KivalasztasScreen} />
       <HomeStack.Screen name="Kereses" component={Kereses} />

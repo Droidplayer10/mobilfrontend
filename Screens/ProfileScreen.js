@@ -42,6 +42,9 @@ const InputButtons = () => {
   const [felhasznalo_jelszo, setfelhasznalo_jelszo] = useState("");
 
   async function Handlelogin() {
+    if (felhasznalo_id!="" && felhasznalo_jelszo!="") {
+      
+    
     try {
       const body = JSON.stringify({
         felhasznalo_id: felhasznalo_id,
@@ -60,22 +63,31 @@ const InputButtons = () => {
   
       const data = response.data;
   
-      if (data.message == "Sikeres bejelentkezés!") {
+      if (data.succes) {
         // Store the felhasznalo_id value in AsyncStorage
         await AsyncStorage.setItem("felhasznalo_id", felhasznalo_id);
-  
-        alert("Üdv " + data.message);
-  
+      
+        alert("Üdv! " + data.message);
+      
         navigation.navigate("BejelentkezettProfileScreen", {
           felhasznalo_id,
         });
+      } else if (data.message === 'Helytelen felhasználó név') {
+        alert('Helytelen felhasználó név!');
+      } else if (data.message === 'Helytelen jelszó') {
+        alert('Helytelen jelszó!');
       } else {
-        alert("Sikertelen");
+        alert('Ismeretlen hiba történt!');
       }
     } catch (error) {
       console.error(error);
     }
   }
+  else{
+    alert("Kérlek töltsd ki mindkét mezőt!")
+  }
+}
+  
 
   const Handleregist = () =>{
     navigation.navigate('Regisztracio')

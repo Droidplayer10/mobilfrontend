@@ -48,7 +48,7 @@ const BejelentkezettProfileScreen = ({navigation}) => {
           
         </TouchableOpacity>
         
-<Text style={styles.ButtonTitle}>Hello {felhasznaloId} !</Text>
+<Text style={styles.ButtonTitle}>Hello Tamás!</Text>
 
 <Animatable.Image
 animation="bounceIn"
@@ -86,7 +86,7 @@ resizeMode={"cover"}
           onPress={() => navigation.navigate('Szalloda')}
           
           >
-          <Text style={styles.ButtonTitle}>Előzmények</Text>
+          <Text style={styles.ButtonTitle}>Utazásaid</Text>
         </TouchableOpacity>
         <Text></Text>
         <TouchableOpacity
@@ -94,7 +94,7 @@ resizeMode={"cover"}
           onPress={() => navigation.navigate('Auto')}
           
           >
-          <Text style={styles.ButtonTitle}>Ajánlatok</Text>
+          <Text style={styles.ButtonTitle}>Ajánlataink</Text>
         </TouchableOpacity>
         </View>
        
