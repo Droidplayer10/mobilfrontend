@@ -118,34 +118,7 @@ const selectedDate = date;
        
       />
 
-<DatePicker
-        style={{width: 200}}
-        value={date}
-  
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        minDate="2023-02-01"
-        maxDate="2023-06-10"
-        confirmBtnText="Confirm"
-        onCloseModal={hideDatePicker}
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-          // ... You can check the source to find the other keys.
-        }}
-        
-        onChange={handleDateChange} 
-       
-      />
+
 
       
 </View>      
