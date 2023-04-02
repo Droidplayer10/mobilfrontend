@@ -118,6 +118,7 @@ const Foglalas = () => {
 
             <View style={styles.modalView}>
               <Text>{item.orszag_nev}</Text>
+             
               <TextInput
                 style={{ height: 35, borderColor: "#68BBE3", borderWidth: 2, margin: 5, padding: 5, borderRadius: 20 }}
                 onChangeText={(text) => searchFilterFunction2(text)}
@@ -133,18 +134,27 @@ const Foglalas = () => {
 
               </Text>
 
-              <ScrollView>
-                <TouchableOpacity onPress={() => {
-                  navigation.navigate(<KivalasztasScreen name={item.varos_nev} />, {
-                    itemvarosnev: item.varos_nev
-
-                  })
-                }}>
-                  <Text>
-                    {item.varos_nev}
-                  </Text>
-                </TouchableOpacity>
-              </ScrollView>
+              
+              <FlatList
+            data={item.varosok}
+            keyExtractor={(varos) => varos}
+            renderItem={({ item }) => (
+              <View>
+              <TouchableOpacity style={styles.varosbutton} onPress={() => {
+                navigation.navigate('Kivalasztas', {itemorszagvarosnev: item});
+                
+              }}>
+                <Text>
+                  {item}
+                </Text>
+                
+              </TouchableOpacity>
+              <Text></Text>
+              </View>
+            )}
+          />
+               
+              
 
 
 
@@ -183,7 +193,8 @@ const Foglalas = () => {
           <Text style={styles.textStyle}> {item.orszag_nev}</Text>
 
         </Pressable>
-        <Text>{"\n"}</Text>
+        
+        <Text></Text>
 
       </View>
     );
@@ -279,6 +290,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2
+  },
+  varosbutton:{
+    backgroundColor: '#68BBE3',
+    borderRadius:20,
+    padding: 10,
+    elevation: 2,
+    height: 40,
+    width: 170,
+    justifyContent:'center',
+    alignItems: 'center'
   },
   bezarasbutton: {
     borderRadius: 80,

@@ -30,10 +30,9 @@ const Kivalasztas = ({route,navigation}) => {
   const [IsDatePickerVisible, setIsDatePickerVisible] = useState(false);
   const [ajanlathonnanvaros, setajanlathonnanvaros] = useState("");
   const [selectedValue, setSelectedValue] = useState();
+  const {from} = route.params;
+
   
-  const { itemajanlatnev } = route.params;
-  const {itemajanlatnap} = route.params;
-  const {itemajanlatvarosnev} = route.params;
   
   const [felhasznaloId, setFelhasznaloId] = useState(null);
   const [bejelentkezve, setBejelentkezve] = useState(false);
@@ -48,7 +47,6 @@ const Kivalasztas = ({route,navigation}) => {
     };
     Bejelentkezes();
   }, []);
-  
 
 
   async function Utazom() {
@@ -84,155 +82,298 @@ const Kivalasztas = ({route,navigation}) => {
       navigation.navigate('Profile');
     }
   }
+  const showDatePicker = () => {
+    setIsDatePickerVisible(true);
+  };
+  const hideDatePicker = () => {
+    setIsDatePickerVisible(false);
+  };
   
-   
-
+  
+  const handleDateChange = (event, selectedDate) => {
+    hideDatePicker();
+    setDate(selectedDate || date);
+  };
+  const selectedDate = date;
   
 
-const showDatePicker = () => {
-  setIsDatePickerVisible(true);
-};
-const hideDatePicker = () => {
-  setIsDatePickerVisible(false);
-};
 
+  if (from ==="ajanlatok") {
+    const { itemajanlatnev } = route.params;
+  const {itemajanlatnap} = route.params;
+  const {itemajanlatvarosnev} = route.params;
+  const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 60 * 1000);
 
-const handleDateChange = (event, selectedDate) => {
-  hideDatePicker();
-  setDate(selectedDate || date);
-};
-
-
-const selectedDate = date;
-const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 60 * 1000);
-
-  return(
-    <NativeBaseProvider>
-      <Center flex={1}>
-
-     
-
-      <Center bg="secondary.300" _text={{
-    color: 'white'
-  }} rounded="xl" w={"90%"} h={24} >
-      {itemajanlatnev}
-      
-
-
-     
-      
-     
-    </Center>
-      
-
-
-
-<Text></Text>
-
-<Text>Honnan: </Text>
-
-<Box alignItems="center">
-      <Input mx="3" placeholder="Város" w="50%" onChangeText={(ajanlathonnanvaros) => setajanlathonnanvaros(ajanlathonnanvaros)} />
-    </Box>
-
-<Text></Text>
-<Text>Úticél:</Text>
-<Text>{itemajanlatvarosnev}</Text>
-
-<Text>Melyik nap szeretne menni?</Text>
-
-<View  >
-
-<TouchableOpacity 
-      style={styles.selectDateBtn}
-      onPress={showDatePicker}>
-      <Text style={styles.selectDateBtnText}>Válassz dátumot</Text>
-    </TouchableOpacity>
-      
-</View>
-
-
-
-{IsDatePickerVisible && (
+    return(
+      <NativeBaseProvider>
+        <Center flex={1}>
   
-  <View>
-    
-<DatePicker
-        style={{width: 200}}
-        value={date}
-  
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        minDate="2023-02-01"
-        maxDate="2023-06-10"
-        confirmBtnText="Confirm"
-        onCloseModal={hideDatePicker}
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0
-          },
-          dateInput: {
-            marginLeft: 36
-          }
-          // ... You can check the source to find the other keys.
-        }}
-        
-        onChange={handleDateChange} 
        
-      />
-
+  
+        <Center bg="secondary.300" _text={{
+      color: 'white'
+    }} rounded="xl" w={"90%"} h={24} >
+        
+        
+  
+        <Text style={styles.itemvarosnevText}>{itemajanlatnev} </Text>
+       
+        
+       
+      </Center>
+        
+  
+  
+  
+  <Text></Text>
+  
+  <Text>Honnan: </Text>
+  
+  <Box alignItems="center">
+        <Input mx="3" placeholder="Város" w="50%" onChangeText={(ajanlathonnanvaros) => setajanlathonnanvaros(ajanlathonnanvaros)} />
+      </Box>
+  
+  <Text></Text>
+  <Text>Úticél:</Text>
+  <Text>{itemajanlatvarosnev}</Text>
+  
+  <Text>Melyik nap szeretne menni?</Text>
+  
+  <View  >
+  
+  <TouchableOpacity 
+        style={styles.selectDateBtn}
+        onPress={showDatePicker}>
+        <Text style={styles.selectDateBtnText}>Válassz dátumot</Text>
+      </TouchableOpacity>
+        
+  </View>
+  
+  
+  
+  {IsDatePickerVisible && (
+    
+    <View>
       
-</View>      
-)}
+  <DatePicker
+          style={{width: 200}}
+          value={date}
+    
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          minDate="2023-02-01"
+          maxDate="2023-06-10"
+          confirmBtnText="Confirm"
+          onCloseModal={hideDatePicker}
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+            // ... You can check the source to find the other keys.
+          }}
+          
+          onChange={handleDateChange} 
+         
+        />
+  
+        
+  </View>      
+  )}
+  
+  <Text>Kiválasztott dátum: {date.toLocaleDateString()}</Text>
+  
+  <Text>Hazamenet dátum: {returnDate.toLocaleDateString()}</Text>
+  
+  <Text></Text>
+  <Text>Mennyi fő szeretne utazni?</Text>
+  <Text></Text>
+  <View style={styles.pickerStyle}>
+  
+  <Picker
+          selectedValue={selectedValue}
+          style={{ height: 50, width: 150 }}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        >
+          <Picker.Item label="1" value="1" />
+          <Picker.Item label="2" value="2" />
+          <Picker.Item label="3" value="3" />
+          <Picker.Item label="4" value="4" />
+          <Picker.Item label="5" value="5" />
+          <Picker.Item label="6" value="6" />
+          <Picker.Item label="7" value="7" />
+        
+        </Picker>
+        </View>
+        <Text></Text>
+        <Text></Text>
+  <Stack mb="2.5" mt="1.5" direction={{
+          base: "row",
+          md: "row"
+        }} space={2} mx={{
+          base: "auto",
+          md: "0"
+        }}>
+          <Button size="lg" variant="outline" colorScheme="secondary" onPress={() => navigation.goBack()} > 
+              Mégse
+            </Button>
+  <Button size="lg" variant="solid" colorScheme="secondary" onPress={Utazom} >
+              Utazom!
+            </Button>
+  </Stack>
+  </Center>
+      </NativeBaseProvider>
+    )
 
-<Text>Kiválasztott dátum: {date.toLocaleDateString()}</Text>
 
-<Text>Hazamenet dátum: {returnDate.toLocaleDateString()}</Text>
-
-<Text></Text>
-<Text>Mennyi fő szeretne utazni?</Text>
-<Text></Text>
-<View style={styles.pickerStyle}>
-
-<Picker
-        selectedValue={selectedValue}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        <Picker.Item label="1" value="1" />
-        <Picker.Item label="2" value="2" />
-        <Picker.Item label="3" value="3" />
-        <Picker.Item label="4" value="4" />
-        <Picker.Item label="5" value="5" />
-        <Picker.Item label="6" value="6" />
-        <Picker.Item label="7" value="7" />
+  }
+  else{
+    const {itemorszagvarosnev} = route.params
+    
+    return(
+      <NativeBaseProvider>
+        <Center flex={1}>
+  
+       
+  
+        <Center bg="secondary.300" _text={{
+      color: 'white'
+    }} rounded="xl" w={"90%"} h={24} >
+      <Text style={styles.itemvarosnevText}>{itemorszagvarosnev} </Text>
+        
+  
+  
+       
+        
+       
+      </Center>
+        
+  
+  
+  
+  <Text></Text>
+  
+  <Text>Honnan: </Text>
+  
+  <Box alignItems="center">
+        <Input mx="3" placeholder="Város" w="50%" onChangeText={(ajanlathonnanvaros) => setajanlathonnanvaros(ajanlathonnanvaros)} />
+      </Box>
+  
+  <Text></Text>
+  <Text>Úticél:</Text>
+  <Text>{itemorszagvarosnev}</Text>
+  
+  <Text>Utazási dátum:</Text>
+  
+  <View  >
+  
+  <TouchableOpacity 
+        style={styles.selectDateBtn}
+        onPress={showDatePicker}>
+        <Text style={styles.selectDateBtnText}>Válassz dátumot</Text>
+      </TouchableOpacity>
+        
+  </View>
+  
+  
+  
+  {IsDatePickerVisible && (
+    
+    <View>
       
-      </Picker>
-      </View>
-      <Text></Text>
-      <Text></Text>
-<Stack mb="2.5" mt="1.5" direction={{
-        base: "row",
-        md: "row"
-      }} space={2} mx={{
-        base: "auto",
-        md: "0"
-      }}>
-        <Button size="lg" variant="outline" colorScheme="secondary" onPress={() => navigation.goBack()} > 
-            Mégse
-          </Button>
-<Button size="lg" variant="solid" colorScheme="secondary" onPress={Utazom} >
-            Utazom!
-          </Button>
-</Stack>
-</Center>
-    </NativeBaseProvider>
-  )
+  <DatePicker
+          style={{width: 200}}
+          value={date}
+    
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          minDate="2023-02-01"
+          maxDate="2023-06-10"
+          confirmBtnText="Confirm"
+          onCloseModal={hideDatePicker}
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+            // ... You can check the source to find the other keys.
+          }}
+          
+          onChange={handleDateChange} 
+         
+        />
+        
+  
+        
+  </View>
+        
+  )}
+  
+  
+  <Text>Kiválasztott dátum: {date.toLocaleDateString()}</Text>
+  
+  
+  <Text></Text>
+  <Text>Hány fő szeretne utazni?</Text>
+  <Text></Text>
+  <View style={styles.pickerStyle}>
+  
+  <Picker
+          selectedValue={selectedValue}
+          style={{ height: 50, width: 150 }}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        >
+          <Picker.Item label="1" value="1" />
+          <Picker.Item label="2" value="2" />
+          <Picker.Item label="3" value="3" />
+          <Picker.Item label="4" value="4" />
+          <Picker.Item label="5" value="5" />
+          <Picker.Item label="6" value="6" />
+          <Picker.Item label="7" value="7" />
+        
+        </Picker>
+        
+        
+        </View>
+        <Text></Text>
+        <Text></Text>
+  <Stack mb="2.5" mt="1.5" direction={{
+          base: "row",
+          md: "row"
+        }} space={2} mx={{
+          base: "auto",
+          md: "0"
+        }}>
+          <Button size="lg" variant="outline" colorScheme="secondary" onPress={() => navigation.goBack()} > 
+              Mégse
+            </Button>
+  <Button size="lg" variant="solid" colorScheme="secondary" onPress={Utazom} >
+              Utazom!
+            </Button>
+  </Stack>
+  
+  </Center>
+      </NativeBaseProvider>
+    )
+    
+  }
+  
+
+ 
 
 }
 const styles = StyleSheet.create({
@@ -254,6 +395,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 14
+  },
+  itemvarosnevText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 18
   },
 });
 

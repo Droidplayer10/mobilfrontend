@@ -135,6 +135,7 @@ const Ajanlat = () => {
             </HStack>
             <Button size="sm" variant="solid" colorScheme="secondary" onPress={()=>{
                navigation.navigate('Kivalasztas',{
+                from: 'ajanlatok',
                 itemajanlatnev: item.ajanlat_nev,
                 itemajanlatnap: item.ajanlat_nap,
                 itemajanlatvarosnev: item.ajanlat_varosnev
