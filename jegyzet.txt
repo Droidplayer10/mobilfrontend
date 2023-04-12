@@ -1,3 +1,11 @@
+
+Koncepcio:
+Utazasi iroda app:
+
+Honnan varos megadása után dobja fel az arakat, repuloszolgaltasokat stb. ---keresni kene ilyen api-t
+Ha nincs ilyen api akkor repulosceg az app,ahol mi adjuk meg az arat
+
+
 vegpont: adott varosok megjelenitese, sql: where varosok.orszag_id_nev == orszagok.orszag_id
 
 
