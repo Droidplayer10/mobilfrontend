@@ -20,7 +20,7 @@ import {
 import Ajanlat from './AjanlatScreen';
 import { Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { set } from 'react-native-reanimated';
+
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 
@@ -31,8 +31,12 @@ const Kivalasztas = ({route,navigation}) => {
   const [ajanlathonnanvaros, setajanlathonnanvaros] = useState("");
   const [selectedValue, setSelectedValue] = useState();
   const {from} = route.params;
+  const { itemajanlatnev } = route.params;
+  const {itemajanlatnap} = route.params;
+  const {itemajanlatvarosnev} = route.params;
+  const {itemorszagvarosnev} = route.params;
+  const [returnDate, setReturnDate] = useState(new Date());
 
-  
   
   const [felhasznaloId, setFelhasznaloId] = useState(null);
   const [bejelentkezve, setBejelentkezve] = useState(false);
@@ -48,7 +52,7 @@ const Kivalasztas = ({route,navigation}) => {
     Bejelentkezes();
   }, []);
 
-
+{/** 
   async function Utazom() {
     
     if (bejelentkezve) {
@@ -62,7 +66,10 @@ const Kivalasztas = ({route,navigation}) => {
             returnDate,
             selectedValue,
           });
-  
+          setReturnDate(selectedDate || returnDate);
+
+
+
           const response = await axios.post(IP.ipcim + 'felvitel', body, {
             headers: {
               'Content-Type': 'application/json',
@@ -82,6 +89,13 @@ const Kivalasztas = ({route,navigation}) => {
       navigation.navigate('Profile');
     }
   }
+  
+  */}
+
+
+
+
+
   const showDatePicker = () => {
     setIsDatePickerVisible(true);
   };
@@ -99,10 +113,7 @@ const Kivalasztas = ({route,navigation}) => {
 
 
   if (from ==="ajanlatok") {
-    const { itemajanlatnev } = route.params;
-  const {itemajanlatnap} = route.params;
-  const {itemajanlatvarosnev} = route.params;
-  const returnDate = new Date(selectedDate.getTime() + itemajanlatnap * 24 * 60 * 60 * 1000);
+    
 
     return(
       <NativeBaseProvider>
@@ -235,7 +246,6 @@ const Kivalasztas = ({route,navigation}) => {
 
   }
   else{
-    const {itemorszagvarosnev} = route.params
     
     return(
       <NativeBaseProvider>
@@ -361,7 +371,14 @@ const Kivalasztas = ({route,navigation}) => {
           <Button size="lg" variant="outline" colorScheme="secondary" onPress={() => navigation.goBack()} > 
               Mégse
             </Button>
-  <Button size="lg" variant="solid" colorScheme="secondary" onPress={Utazom} >
+  <Button size="lg" variant="solid" colorScheme="secondary" onPress={() => {
+                navigation.navigate('Jaratok', {
+                  itemorszagvarosnev: itemorszagvarosnev,
+                  ajanlathonnanvaros: ajanlathonnanvaros,
+                  selectedDate: selectedDate
+                });
+                
+              }} >
               Utazom!
             </Button>
   </Stack>
