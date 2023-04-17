@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList,ImageBackground } from 'react-native';
 import axios from "axios";
+import { TouchableOpacity } from 'react-native';
 
 const Jaratok = ({ origin, destination }) => {
   const [flights, setFlights] = useState([]);
@@ -25,6 +26,8 @@ const Jaratok = ({ origin, destination }) => {
       try {
         const response = await axios.request(options);
         setFlights(response.data);
+        
+        
       } catch (error) {
         console.error(error);
       }
@@ -35,18 +38,40 @@ const Jaratok = ({ origin, destination }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Járatok:</Text>
-      <FlatList
-        // Az apihoz ezt kell megadni data={flights.origin_to_destination_trip[0]}
-        data={flights}
-        renderItem={({ item }) => (
-          <View style={styles.flight}>
-            <Text style={styles.flightText}>Repülőjárat szám: {item.flight_number}</Text>
-           
-          </View>
-        )}
-        keyExtractor={(item) => item.flight_number}
-      />
+ <FlatList
+  data={flights.origin_to_destination_trip}
+  renderItem={({ item }) => (
+   
+      <ImageBackground 
+      source={require("./ticket.png")}
+        resizeMode="stretch"
+        style={styles.image}>
+      <Text style={styles.flightText}>Indulási idő: {item[0].departure_datetime_utc}</Text>
+            <Text style={styles.flightText}>Érkezés idő: {item[0].arrival_datetime_utc}</Text>
+
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+  <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+  <View>
+    <Text style={{width: 50, textAlign: 'center'}}>Hello</Text>
+  </View>
+  <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+</View>
+
+
+            <Text style={styles.flightText}>Repülőjárat szám: {item[0].flight_number}</Text>
+            <Text></Text>
+            <TouchableOpacity style={{alignItems:'flex-end', alignSelf:'flex-end', paddingEnd: 20,paddingBottom: 5, paddingLeft: 10, backgroundColor:"#68BBE3", borderRadius: 10}}>
+              <Text style={styles.lefoglalomText} >Lefoglalom</Text>
+            </TouchableOpacity>
+            
+            
+    </ImageBackground>
+    
+   
+    
+  )}
+  keyExtractor={(item) => item.flight_number}
+/>
     </View>
   );
 }
@@ -56,9 +81,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 40,
-    paddingHorizontal: 20,
+    
     backgroundColor: '#fff',
+  },
+   image: {
+    flex: 1,
+    justifyContent: 'center',
+    width: 420,height:230
   },
   header: {
     fontSize: 24,
@@ -73,9 +102,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   flightText: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 5,
+    paddingStart: 15
   },
+  lefoglalomText:{
+    fontSize: 16
+  }
 });
 
 export default Jaratok;
