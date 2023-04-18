@@ -52,7 +52,7 @@ const Kivalasztas = ({route,navigation}) => {
     Bejelentkezes();
   }, []);
 
-{/** 
+
   async function Utazom() {
     
     if (bejelentkezve) {
@@ -90,7 +90,7 @@ const Kivalasztas = ({route,navigation}) => {
     }
   }
   
-  */}
+  
 
 
 
@@ -375,7 +375,8 @@ const Kivalasztas = ({route,navigation}) => {
                 navigation.navigate('Jaratok', {
                   itemorszagvarosnev: itemorszagvarosnev,
                   ajanlathonnanvaros: ajanlathonnanvaros,
-                  selectedDate: selectedDate
+                  selectedDate: selectedDate,
+                  selectedValue: selectedValue
                 });
                 
               }} >

@@ -2,9 +2,61 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList,ImageBackground } from 'react-native';
 import axios from "axios";
 import { TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Jaratok = ({ origin, destination }) => {
+const Jaratok = ({ route,origin, destination }) => {
   const [flights, setFlights] = useState([]);
+  const [bejelentkezve, setBejelentkezve] = useState(false);
+  const [felhasznaloId, setFelhasznaloId] = useState(null);
+  const {selectedValue} = route?.params;
+  
+const Utazom=()=>{
+  alert('Sikeresen felvettük az utazásodat!');
+
+}
+
+
+
+  async function Utazom1() {
+    
+    const felhasznaloId = await AsyncStorage.getItem('felhasznalo_id');
+    if (felhasznaloId) {
+      setFelhasznaloId(felhasznaloId);
+      
+    }
+     
+        try {
+          const body = JSON.stringify({
+            felhasznaloId,
+            origin_code,
+            destination_code,
+            origin_departure_date,
+            destination_departure_date,
+            selectedValue
+
+            
+          });
+          setReturnDate(selectedDate || returnDate);
+
+
+
+          const response = await axios.post(IP.ipcim + 'felvitel', body, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const data = response.data;
+          alert('Sikeresen felvettük az utazásodat!');
+          navigation.navigate('Home')
+        } catch (error) {
+          console.error(error);
+        }
+     
+    
+  }
+  
+
+
 
   useEffect(() => {
     const fetchFlights = async () => {
@@ -12,8 +64,8 @@ const Jaratok = ({ origin, destination }) => {
         method: 'GET',
         url: 'https://ryanair.p.rapidapi.com/flights',
         params: {
-          origin_code: 'LGW',
-          destination_code: 'DUB',
+          origin_code: 'Dub',
+          destination_code: 'LGW',
           origin_departure_date: '2023-09-28',
           destination_departure_date: '2023-10-28'
         },
@@ -35,6 +87,7 @@ const Jaratok = ({ origin, destination }) => {
 
     fetchFlights();
   }, [origin, destination]);
+  
 
   return (
     <View style={styles.container}>
@@ -49,18 +102,13 @@ const Jaratok = ({ origin, destination }) => {
       <Text style={styles.flightText}>Indulási idő: {item[0].departure_datetime_utc}</Text>
             <Text style={styles.flightText}>Érkezés idő: {item[0].arrival_datetime_utc}</Text>
 
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-  <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-  <View>
-    <Text style={{width: 50, textAlign: 'center'}}>Hello</Text>
-  </View>
-  <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-</View>
+         
 
-
+            <Text style={styles.flightText}>Innen indul: {item[0].origin_code}</Text>
+            <Text style={styles.flightText}>Utazási cél: {item[0].destination_code}</Text>
             <Text style={styles.flightText}>Repülőjárat szám: {item[0].flight_number}</Text>
             <Text></Text>
-            <TouchableOpacity style={{alignItems:'flex-end', alignSelf:'flex-end', paddingEnd: 20,paddingBottom: 5, paddingLeft: 10, backgroundColor:"#68BBE3", borderRadius: 10}}>
+            <TouchableOpacity style={{alignItems:'flex-end', alignSelf:'flex-end', paddingEnd: 12,paddingBottom: 5, paddingLeft: 5, backgroundColor:"#68BBE3", borderRadius: 10}} onPress={Utazom}>
               <Text style={styles.lefoglalomText} >Lefoglalom</Text>
             </TouchableOpacity>
             
