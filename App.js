@@ -137,8 +137,10 @@ const App=()=> {
       >
         <Tab.Screen name="Home" component={HomeStackScreen} 
          options={{
+          headerShown:false,
       headerStyle: {
         backgroundColor: '#567189',
+        
       },
       headerTintColor: 'white',
       headerTitleStyle: {
@@ -147,6 +149,7 @@ const App=()=> {
     }}/>
         <Tab.Screen name="Ajanlatok" component={AjanlatStackScreen}
              options={{
+              
               headerStyle: {
                 backgroundColor: '#567189',
               },
@@ -158,6 +161,7 @@ const App=()=> {
         
         <Tab.Screen name="Profile" component={ProfileStackScreen} 
              options={{
+              headerShown:false,
               headerStyle: {
                 backgroundColor: '#567189',
               },
@@ -168,6 +172,7 @@ const App=()=> {
             }}/>
         <Tab.Screen name="Settings" component={SettingsStackScreen}
              options={{
+              headerShown:false,
               headerStyle: {
                 backgroundColor: '#567189',
               },

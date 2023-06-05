@@ -117,6 +117,7 @@ const Foglalas = () => {
             {/* -----MODAL ABLAK------- */}
 
             <View style={styles.modalView}>
+              
               <Text>{item.orszag_nev}</Text>
              
               <TextInput
@@ -180,6 +181,7 @@ const Foglalas = () => {
           </View>
         </Modal>
         {/*------------Modal megnyitása */}
+        
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => {
@@ -220,6 +222,8 @@ const Foglalas = () => {
 
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+      <Text></Text>
+      <Text></Text>
         <TextInput
           style={{ height: 35, borderColor: "#68BBE3", borderWidth: 2, margin: 5, padding: 5, borderRadius: 20 }}
           onChangeText={(text) => searchFilterFunction(text)}
